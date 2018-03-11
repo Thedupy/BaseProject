@@ -47,5 +47,10 @@ namespace Newperfectmodelm
         {
             return u ? (oldM.MiddleButton == ButtonState.Released && currentM.MiddleButton == ButtonState.Pressed) : (currentM.MiddleButton == ButtonState.Pressed);
         }
+
+        public static bool MouseOn(Rectangle source)
+        {
+            return source.Contains(MousePos);
+        }
     }
 }

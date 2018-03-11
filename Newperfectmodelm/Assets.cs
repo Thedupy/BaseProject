@@ -12,22 +12,22 @@ namespace Newperfectmodelm
     public class Assets
     {
         #region Variable
-
+        public static Texture2D PixelW, PixelB;
+        public static SpriteFont Font;
         #endregion
 
         #region Methode
         public static void LoadAll()
         {
-        }
+            PixelW = Utils.CreateTexture(1, 1, Color.White);
+            PixelB = Utils.CreateTexture(1, 1, Color.Black);
 
-        public static Texture2D Slice(Rectangle region, Texture2D sheet)
-        {
-            Color[] rawData = new Color[region.Width * region.Height];
-            sheet.GetData(0, region, rawData, 0, rawData.Length);
-            Console.ReadKey();
-            Texture2D BufferTexture = new Texture2D(Main.Device, region.Width, region.Height);
-            BufferTexture.SetData(rawData);
-            return BufferTexture;
+            //SPRITE
+
+            //SON
+
+            //FONT
+            Font = Main.Content.Load<SpriteFont>("littlefont");
         }
         #endregion
     }

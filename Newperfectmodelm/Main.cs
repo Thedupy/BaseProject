@@ -37,6 +37,7 @@ namespace Newperfectmodelm
             Graphics.PreferredBackBufferHeight = Height;
             Graphics.SynchronizeWithVerticalRetrace = false;
             Graphics.ApplyChanges();
+            Instance.IsMouseVisible = true;
 
             SetScreen(new GameScreen());
 
