@@ -76,6 +76,7 @@ namespace Newperfectmodelm
         float Delay;
         float Speed;
         string Text;
+        Texture2D Texture;
 
         public UILabel(string text, Vector2 position, float delay, float speed, Color color) : base(position)
         {
@@ -83,6 +84,13 @@ namespace Newperfectmodelm
             Delay = delay;
             Speed = speed;
             Text = text;
+        }
+
+        public UILabel(Texture2D texture, Vector2 position, float delay, float speed) : base(position)
+        {
+            Texture = texture;
+            Delay = delay;
+            Speed = speed;
         }
 
         public override void Update(float time)
@@ -98,7 +106,10 @@ namespace Newperfectmodelm
 
         public override void Draw(SpriteBatch batch)
         {
-            batch.DrawString(Assets.Font, Text, Position, Color);
+            if (Text != null)
+                batch.DrawString(Assets.Font, Text, Position, Color);
+            else
+                batch.Draw(Texture, Position, Color.White);
         }
     }
 

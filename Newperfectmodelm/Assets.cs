@@ -13,6 +13,11 @@ namespace Newperfectmodelm
     {
         #region Variable
         public static Texture2D PixelW, PixelB;
+
+        //SPRITE
+        public static Texture2D Heart;
+        //SON
+        //FONT
         public static SpriteFont Font;
         #endregion
 
@@ -23,7 +28,7 @@ namespace Newperfectmodelm
             PixelB = Utils.CreateTexture(1, 1, Color.Black);
 
             //SPRITE
-
+            Heart = Main.Content.Load<Texture2D>("heart");
             //SON
 
             //FONT

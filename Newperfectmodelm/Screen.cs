@@ -45,11 +45,22 @@ namespace Newperfectmodelm
 
         public override void Create()
         {
+            
         }
 
         public override void Update(float time)
         {
             UIManager.Update(time);
+
+            if(Input.Right(true))
+            {
+                UIManager.AddParticle(new UILabel(Assets.Heart, new Vector2(Main.Rand.Next(Main.Width), Main.Rand.Next(200, Main.Height)), 1500, 1));
+            }
+
+            if(Input.KeyPressed(Keys.Z, true))
+            {
+                UIManager.AddParticle(new UIPopup(new Vector2(200,250), 400, 100, "Je vous aime", Color.White, Color.Black));
+            }
         }
 
         public override void Draw()
