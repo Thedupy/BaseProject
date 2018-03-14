@@ -115,17 +115,27 @@ namespace Newperfectmodelm
 
     public class UIButton : UI
     {
+        Texture2D Texture;
         Rectangle Bounds;
         Color NormalColor, SurvoledColor, ActualColor;
         Byte R, G, B;
         WhenPressed Action;
 
-        public UIButton(Vector2 position, int width, int height, Color normalColor, Color survoledColor, WhenPressed action) : base(position)
+        public UIButton(Vector2 position, int width, int height, Color normalColor, Color survoledColor, WhenPressed action, Texture2D texture = null) : base(position)
         {
             Bounds = new Rectangle((int)position.X, (int)position.Y, width, height);
             NormalColor = normalColor;
             SurvoledColor = survoledColor;
             Action = action;
+            if (texture != null)
+                Texture = texture;
+        }
+
+        public UIButton(Vector2 position, int width, int height, WhenPressed action, Texture2D texture) : base(position)
+        {
+            Bounds = new Rectangle((int)position.X, (int)position.Y, width, height);
+            Action = action;
+            Texture = texture;
         }
 
         public override void Update(float time)
@@ -146,7 +156,11 @@ namespace Newperfectmodelm
 
         public override void Draw(SpriteBatch batch)
         {
-            batch.Draw(Assets.PixelW, Bounds, ActualColor);
+            if (Texture != null)
+                batch.Draw(Texture, Position, Color.White);
+            else
+                batch.Draw(Assets.PixelW, Bounds, ActualColor);
+
         }
 
         public delegate void WhenPressed();
