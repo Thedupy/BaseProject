@@ -14,56 +14,50 @@ namespace BaseProject
         {
         }
 
-        public static void Update(float time)
+        public static void Update(float _time)
         {
-            //foreach (var item in ListParticles)
-            //{
-            //    item.Update(time);
-            //}
-            for (int i = 0; i < ListParticles.Count; i++)
+           
+            for (int i = 0; i < listParticles.Count; i++)
             {
-                ListParticles[i].Update(time);
+                listParticles[i].Update(_time);
             }
-            ListParticles.RemoveAll(k => k.Ended == true);
+            listParticles.RemoveAll(k => k.ended == true);
         }
 
-        public static void Draw(SpriteBatch batch)
+        public static void Draw(SpriteBatch _batch)
         {
-            //foreach (var item in ListParticles)
-            //{
-            //    item.Draw(batch);
-            //}
-            for (int i = 0; i < ListParticles.Count; i++)
+            
+            for (int i = 0; i < listParticles.Count; i++)
             {
-                ListParticles[i].Draw(batch);
+                listParticles[i].Draw(_batch);
             }
         }
 
         //GESTION PARTICLE
         public static void AddParticle(UI par)
         {
-            ListParticles.Add(par);
+            listParticles.Add(par);
         }
 
-        public static List<UI> ListParticles = new List<UI>();
+        public static List<UI> listParticles = new List<UI>();
     }
 
     public class UI
     {
-        public Vector2 Position;
-        public bool Ended = false;
+        public Vector2 position;
+        public bool ended = false;
         public float timer;
 
-        public UI(Vector2 position)
+        public UI(Vector2 _position)
         {
-            Position = position;
+            this.position = _position;
         }
 
-        public virtual void Update(float time)
+        public virtual void Update(float _time)
         {
         }
 
-        public virtual void Draw(SpriteBatch batch)
+        public virtual void Draw(SpriteBatch _batch)
         {
             //batch.Draw(Texture, Position, Color.White);
         }
@@ -72,94 +66,93 @@ namespace BaseProject
 
     public class UILabel : UI
     {
-        Color Color;
-        float Delay;
-        float Speed;
-        string Text;
-        Texture2D Texture;
+        Color color;
+        float delay;
+        float speed;
+        string text;
+        Texture2D texture;
 
-        public UILabel(string text, Vector2 position, float delay, float speed, Color color) : base(position)
+        public UILabel(string _text, Vector2 _position, float _delay, float _speed, Color _color) : base(_position)
         {
-            Color = color;
-            Delay = delay;
-            Speed = speed;
-            Text = text;
+            this.color = _color;
+            this.delay = _delay;
+            this.speed = _speed;
+            this.text = _text;
         }
 
-        public UILabel(Texture2D texture, Vector2 position, float delay, float speed) : base(position)
+        public UILabel(Texture2D _texture, Vector2 _position, float _delay, float _speed) : base(_position)
         {
-            Texture = texture;
-            Delay = delay;
-            Speed = speed;
+            this.texture = _texture;
+            this.delay = _delay;
+            this.speed = _speed;
         }
 
-        public override void Update(float time)
+        public override void Update(float _time)
         {
-            timer += time;
-            if (timer < Delay)
+            timer += _time;
+            if (timer < delay)
             {
-                Position.Y -= Speed;
+                position.Y -= speed;
             }
             else
-                Ended = true;
+                ended = true;
         }
 
-        public override void Draw(SpriteBatch batch)
+        public override void Draw(SpriteBatch _batch)
         {
-            if (Text != null)
-                batch.DrawString(Assets.Font, Text, Position, Color);
+            if (text != null)
+                _batch.DrawString(Assets.font, text, position, color);
             else
-                batch.Draw(Texture, Position, Color.White);
+                _batch.Draw(texture, position, Color.White);
         }
     }
 
     public class UIButton : UI
     {
-        Texture2D Texture;
-        Rectangle Bounds;
-        Color NormalColor, SurvoledColor, ActualColor;
-        Byte R, G, B;
-        WhenPressed Action;
+        Texture2D texture;
+        Rectangle bounds;
+        Color normalColor, survoledColor, actualColor;
+        WhenPressed action;
 
-        public UIButton(Vector2 position, int width, int height, Color normalColor, Color survoledColor, WhenPressed action, Texture2D texture = null) : base(position)
+        public UIButton(Vector2 _position, int _width, int _height, Color _normalColor, Color _survoledColor, WhenPressed _action, Texture2D _texture = null) : base(_position)
         {
-            Bounds = new Rectangle((int)position.X, (int)position.Y, width, height);
-            NormalColor = normalColor;
-            SurvoledColor = survoledColor;
-            Action = action;
-            if (texture != null)
-                Texture = texture;
+            bounds = new Rectangle((int)_position.X, (int)_position.Y, _width, _height);
+            normalColor = _normalColor;
+            survoledColor = _survoledColor;
+            action = _action;
+            if (_texture != null)
+                texture = _texture;
         }
 
-        public UIButton(Vector2 position, int width, int height, WhenPressed action, Texture2D texture) : base(position)
+        public UIButton(Vector2 _position, int _width, int _height, WhenPressed _action, Texture2D _texture) : base(_position)
         {
-            Bounds = new Rectangle((int)position.X, (int)position.Y, width, height);
-            Action = action;
-            Texture = texture;
+            bounds = new Rectangle((int)_position.X, (int)_position.Y, _width, _height);
+            this.action = _action;
+            this.texture = _texture;
         }
 
-        public override void Update(float time)
+        public override void Update(float _time)
         {
-            if(Input.MouseBox.Intersects(Bounds))
+            if(Input.mouseBox.Intersects(bounds))
             {
-                ActualColor = SurvoledColor;
+                actualColor = survoledColor;
                 if(Input.Left(true))
                 {
-                    Action.Invoke();
+                    action.Invoke();
                 }
             }
                 else
             {
-                ActualColor = NormalColor;
+                actualColor = normalColor;
             }
         }
 
-        public override void Draw(SpriteBatch batch)
+        public override void Draw(SpriteBatch _batch)
         {
-            if (Texture != null)
-                batch.Draw(Texture, Position, Color.White);
+            if (texture != null)
+                _batch.Draw(texture, position, Color.White);
             else
-                batch.Draw(Assets.PixelW, Bounds, ActualColor);
+                _batch.Draw(Assets.pixelW, bounds, actualColor);
 
         }
 
@@ -210,56 +203,61 @@ namespace BaseProject
     public class UIPopup : UI
     {
         public enum PopState { Open, Wait, Close};
-        PopState State;
-        Color ActualColor, TextColor;
-        Rectangle Bounds;
-        string Text;
-        int Kek;
+        PopState state;
+        Color actualColor, textColor;
+        Rectangle bounds;
+        string text;
+        int maxHeight;
 
-        public UIPopup(Vector2 position, int width, int height, string text, Color color, Color textColor) : base(position)
+        public int _Height { get; }
+        public string _Text { get; }
+
+        public UIPopup(Vector2 _position, int _width, int _height, string _text, Color color, Color _textColor) : base(_position)
         {
-            ActualColor = color;
-            Kek = height;
-            int prout = (int)((position.Y + (position.Y + height)) / 2); 
-            Bounds = new Rectangle((int)position.X, prout, width, 0);
-            Text = text;
-            TextColor = textColor;
-            State = PopState.Open;
+            actualColor = color;
+            maxHeight = _height;
+            int prout = (int)((_position.Y + (_position.Y + _height)) / 2); 
+            bounds = new Rectangle((int)_position.X, prout, _width, 0);
+            _Height = _height;
+            _Text = _text;
+            text = _text;
+            textColor = _textColor;
+            state = PopState.Open;
         }
 
-        public override void Update(float time)
+        public override void Update(float _time)
         {
-            switch(State)
+            switch(state)
             {
                 case PopState.Open:
-                    Bounds.Y--;
-                    Bounds.Height += 2;
+                    bounds.Y--;
+                    bounds.Height += 2;
 
-                    if (Bounds.Height >= Kek)
-                        State = PopState.Wait;
+                    if (bounds.Height >= maxHeight)
+                        state = PopState.Wait;
                     break;
                 case PopState.Wait:
-                    timer += time;
+                    timer += _time;
                     if (timer >= 2500)
                     {
-                        State = PopState.Close;
+                        state = PopState.Close;
                     }
                     break;
                 case PopState.Close:
-                    Bounds.Y++;
-                    Bounds.Height -= 2;
-                    if (Bounds.Height < 0)
-                        Ended = true;
+                    bounds.Y++;
+                    bounds.Height -= 2;
+                    if (bounds.Height < 0)
+                        ended = true;
                     break;
             }
             
         }
 
-        public override void Draw(SpriteBatch batch)
+        public override void Draw(SpriteBatch _batch)
         {
-            batch.Draw(Assets.PixelW, Bounds, ActualColor);
-            if(State == PopState.Wait)
-                batch.DrawString(Assets.Font, Text, new Vector2(Bounds.X, Bounds.Y) + new Vector2((Bounds.Width - Assets.Font.MeasureString(Text).X) / 2, (Bounds.Height - Assets.Font.MeasureString(Text).Y) / 2), TextColor);
+            _batch.Draw(Assets.pixelW, bounds, actualColor);
+            if(state == PopState.Wait)
+                _batch.DrawString(Assets.font, text, new Vector2(bounds.X, bounds.Y) + new Vector2((bounds.Width - Assets.font.MeasureString(text).X) / 2, (bounds.Height - Assets.font.MeasureString(text).Y) / 2), textColor);
 
         }
     }

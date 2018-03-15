@@ -10,67 +10,67 @@ namespace BaseProject
 {
     public class Transition
     {
-        public Texture2D Texture;
-        public Color Color;
-        public bool Action;
-        public bool Change;
-        public Screen ScreenToChange;
+        public Texture2D texture;
+        public Color color;
+        public bool action;
+        public bool change;
+        public Screen screenToChange;
 
-        int AlphaValue = 1;
-        int FadeIncrement = 3;
-        double FadeDelay = 0.35;
-        int CptFade = 0;
+        int alphaValue = 1;
+        int fadeIncrement = 3;
+        double fadeDelay = 0.35;
+        int cptFade = 0;
 
         public Transition()
         {
-            Texture = Assets.PixelB;
-            Color = Color.Transparent;
-            Action = false;
+            texture = Assets.pixelB;
+            color = Color.Transparent;
+            action = false;
         }
 
-        public void Update(float time)
+        public void Update(float _time)
         {
-            if (Action)
+            if (action)
             {
-                FadeDelay -= time;
+                fadeDelay -= _time;
 
-                if (FadeDelay <= 0)
+                if (fadeDelay <= 0)
                 {
-                    FadeDelay = 3;
-                    AlphaValue += FadeIncrement;
+                    fadeDelay = 3;
+                    alphaValue += fadeIncrement;
 
-                    if (AlphaValue >= 255 || AlphaValue <= 0)
+                    if (alphaValue >= 255 || alphaValue <= 0)
                     {
-                        if (AlphaValue >= 255)
-                            Change = true;
-                        FadeIncrement *= -1;
-                        CptFade++;
+                        if (alphaValue >= 255)
+                            change = true;
+                        fadeIncrement *= -1;
+                        cptFade++;
                     }
                 }
 
-                if (Change)
+                if (change)
                 {
-                    Change = false;
-                    Main.SetScreen(ScreenToChange);
+                    change = false;
+                    Main.SetScreen(screenToChange);
                 }
 
-                if (CptFade == 2)
+                if (cptFade == 2)
                 {
-                    Action = false;
-                    CptFade = 0;
+                    action = false;
+                    cptFade = 0;
                 }
             }
         }
 
-        public void Fade(Screen newScreen)
+        public void Fade(Screen _newScreen)
         {
-            ScreenToChange = newScreen;
-            Action = true;
+            screenToChange = _newScreen;
+            action = true;
         }
 
-        public void Draw(SpriteBatch batch)
+        public void Draw(SpriteBatch _batch)
         {
-            batch.Draw(Texture, new Rectangle(0, 0, Main.Width, Main.Height), new Color(0, 0, 0, MathHelper.Clamp(AlphaValue, 0, 255)));
+            _batch.Draw(texture, new Rectangle(0, 0, Main.Width, Main.Height), new Color(0, 0, 0, MathHelper.Clamp(alphaValue, 0, 255)));
         }
     }
 }

@@ -9,59 +9,59 @@ namespace BaseProject
 
     public static class TimerManager
     {
-        public static List<Timer> Timers = new List<Timer>();
+        public static List<Timer> timers = new List<Timer>();
 
-        public static void Update(float time)
+        public static void Update(float _time)
         {
-            for (int i = 0; i < Timers.Count; i++)
+            for (int i = 0; i < timers.Count; i++)
             {
-                Timers[i].Update(time);
+                timers[i].Update(_time);
             }
-            Timers.RemoveAll(k => k.Ended == true);
+            timers.RemoveAll(k => k.ended == true);
         }
     }
 
     public class Timer
     {
-        OnEnd Action;
-        float Time, Delay;
-        bool Counted;
-        int Count;
+        OnEnd action;
+        float time, delay;
+        bool counted;
+        int count;
 
-        public bool Ended;
+        public bool ended;
 
 
-        public Timer(float delay, OnEnd action, int count = 0)
+        public Timer(float _delay, OnEnd _action, int _count = 0)
         {
-            Delay = delay;
-            Action = action;
-            if (count != 0)
+            this.delay = _delay;
+            this.action = _action;
+            if (_count != 0)
             {
-                Counted = true;
-                Count = count;
+                counted = true;
+                this.count = _count;
             }
             else
-                Counted = false;
+                counted = false;
 
-            Ended = false;
+            ended = false;
         }
 
 
-        public void Update(float time)
+        public void Update(float _time)
         {
-            Time += time;
-            if(Time >= Delay)
+            this.time += _time;
+            if(this.time >= delay)
             {
-                Action.Invoke();
-                Time = 0;
+                action.Invoke();
+                this.time = 0;
                 //if (!Counted)
                 //    Ended = true;
-                if(Counted)
+                if(counted)
                 {
-                    if (Count > 0)
-                        Count--;
+                    if (count > 0)
+                        count--;
                     else
-                        Ended = true;
+                        ended = true;
                 }
             }
         }

@@ -37,25 +37,25 @@ namespace BaseProject
             // TODO: Unload any non ContentManager content here
         }
 
-        protected override void Update(GameTime gameTime)
+        protected override void Update(GameTime _gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            main.Update(gameTime.ElapsedGameTime.Milliseconds);
+            main.Update(_gameTime.ElapsedGameTime.Milliseconds);
             // TODO: Add your update logic here
 
-            base.Update(gameTime);
+            base.Update(_gameTime);
         }
 
 
-        protected override void Draw(GameTime gameTime)
+        protected override void Draw(GameTime _gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
             main.Draw();
-            base.Draw(gameTime);
+            base.Draw(_gameTime);
         }
     }
 }

@@ -8,11 +8,11 @@ namespace BaseProject
 {
     public class Screen
     {
-        public SpriteBatch Batch;
+        public SpriteBatch batch;
 
         public Screen()
         {
-            Batch = new SpriteBatch(Main.Device);
+            batch = new SpriteBatch(Main.device);
         }
 
         public virtual void Create()
@@ -32,7 +32,7 @@ namespace BaseProject
 
         public virtual void Dispose()
         {
-            Batch.Dispose();
+            batch.Dispose();
         }
     }
 
@@ -51,17 +51,17 @@ namespace BaseProject
             
         }
 
-        public override void Update(float time)
+        public override void Update(float _time)
         {
-            UIManager.Update(time);
-            TimerManager.Update(time);
+            UIManager.Update(_time);
+            TimerManager.Update(_time);
         }
 
         public override void Draw()
         {
-            Batch.Begin();
-            UIManager.Draw(Batch);
-            Batch.End();
+            batch.Begin();
+            UIManager.Draw(batch);
+            batch.End();
         }
     }
 }

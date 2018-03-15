@@ -9,11 +9,11 @@ namespace BaseProject
 {
     public class Entity
     {
-        public Vector2 Position;
+        public Vector2 position;
 
         public Entity(Vector2 _position)
         {
-            Position = _position;
+            position = _position;
         }
     }
 }

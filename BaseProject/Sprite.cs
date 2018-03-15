@@ -11,27 +11,27 @@ namespace BaseProject
 {
     public class Sprite : Entity
     {
-        public Texture2D Texture;
+        public Texture2D texture;
 
         public Rectangle Hitbox
         {
-            get { return new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height); }
+            get { return new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height); }
         }
 
-        public Sprite(Texture2D texture, Vector2 position) : base(position)
+        public Sprite(Texture2D _texture, Vector2 _position) : base(_position)
         {
-            Texture = texture;
-            Position = position;
+            this.texture = _texture;
+            base.position = _position;
         }
 
-        public virtual void Update(float time)
+        public virtual void Update(float _time)
         {
 
         }
 
-        public virtual void Draw(SpriteBatch batch)
+        public virtual void Draw(SpriteBatch _batch)
         {
-            batch.Draw(Texture, Position, Color.White);
+            _batch.Draw(texture, position, Color.White);
 
             ////DECOMMENTER SI BESOIN DE DESSINER LES HITBOX
             //Texture2D tex = Assets.CreateTexture(hitbox.Width, hitbox.Height, new Color(255, 0, 0, 50));

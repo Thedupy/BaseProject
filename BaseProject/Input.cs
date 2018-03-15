@@ -13,8 +13,8 @@ namespace BaseProject
         private static KeyboardState oldK, currentK;
         private static MouseState oldM, currentM;
 
-        public static Rectangle MouseBox;
-        public static Vector2 MousePos;
+        public static Rectangle mouseBox;
+        public static Vector2 mousePos;
 
         public static void Update()
         {
@@ -24,33 +24,33 @@ namespace BaseProject
             currentK = Keyboard.GetState();
             currentM = Mouse.GetState();
 
-            MouseBox = new Rectangle(currentM.X, currentM.Y, 1, 1);
-            MousePos = new Vector2(currentM.X, currentM.Y);
+            mouseBox = new Rectangle(currentM.X, currentM.Y, 1, 1);
+            mousePos = new Vector2(currentM.X, currentM.Y);
         }
 
-        public static bool KeyPressed(Keys k, bool u)
+        public static bool KeyPressed(Keys _k, bool _u)
         {
-            return u ? (oldK[k] == KeyState.Up && currentK[k] == KeyState.Down) : (currentK[k] == KeyState.Down);
+            return _u ? (oldK[_k] == KeyState.Up && currentK[_k] == KeyState.Down) : (currentK[_k] == KeyState.Down);
         }
 
-        public static bool Left(bool u)
+        public static bool Left(bool _u)
         {
-            return u ? (oldM.LeftButton == ButtonState.Released && currentM.LeftButton == ButtonState.Pressed) : (currentM.LeftButton == ButtonState.Pressed);
+            return _u ? (oldM.LeftButton == ButtonState.Released && currentM.LeftButton == ButtonState.Pressed) : (currentM.LeftButton == ButtonState.Pressed);
         }
 
-        public static bool Right(bool u)
+        public static bool Right(bool _u)
         {
-            return u ? (oldM.RightButton == ButtonState.Released && currentM.RightButton == ButtonState.Pressed) : (currentM.RightButton == ButtonState.Pressed);
+            return _u ? (oldM.RightButton == ButtonState.Released && currentM.RightButton == ButtonState.Pressed) : (currentM.RightButton == ButtonState.Pressed);
         }
 
-        public static bool Middle(bool u)
+        public static bool Middle(bool _u)
         {
-            return u ? (oldM.MiddleButton == ButtonState.Released && currentM.MiddleButton == ButtonState.Pressed) : (currentM.MiddleButton == ButtonState.Pressed);
+            return _u ? (oldM.MiddleButton == ButtonState.Released && currentM.MiddleButton == ButtonState.Pressed) : (currentM.MiddleButton == ButtonState.Pressed);
         }
 
-        public static bool MouseOn(Rectangle source)
+        public static bool MouseOn(Rectangle _source)
         {
-            return source.Contains(MousePos);
+            return _source.Contains(mousePos);
         }
     }
 }
