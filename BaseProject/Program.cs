@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Newperfectmodelm
+namespace BaseProject
 {
 #if WINDOWS || LINUX
     /// <summary>

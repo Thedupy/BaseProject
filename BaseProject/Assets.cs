@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Newperfectmodelm
+namespace BaseProject
 {
     public class Assets
     {

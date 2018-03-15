@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Newperfectmodelm
+namespace BaseProject
 {
     public class UIManager
     {
@@ -162,6 +162,47 @@ namespace Newperfectmodelm
                 batch.Draw(Assets.PixelW, Bounds, ActualColor);
 
         }
+
+        #region codetest
+        //for (int i = 0; i<Width; i++)
+        //    {
+        //        for (int j = 0; j<Heigth; j++)
+        //        {
+        //            if(i==0)
+        //            {
+        //                if(j==0)
+        //                    Batch.Draw(actualDic["topleft"], new Vector2(i* 32, j* 32), Color.White);
+        //                else if(j== Heigth - 1)
+        //                    Batch.Draw(actualDic["bottomleft"], new Vector2(i* 32, j* 32), Color.White);
+        //                else
+        //                    Batch.Draw(actualDic["left"], new Vector2(i* 32, j* 32), Color.White);
+        //            }
+        //            else if (i == Width-1)
+        //            {
+        //                if (j == 0)
+        //                    Batch.Draw(actualDic["topright"], new Vector2(i* 32, j* 32), Color.White);
+        //                else if (j == Heigth - 1)
+        //                    Batch.Draw(actualDic["bottomright"], new Vector2(i* 32, j* 32), Color.White);
+        //                else
+        //                    Batch.Draw(actualDic["right"], new Vector2(i* 32, j* 32), Color.White);
+        //            }
+        //            else if (j == 0)
+        //            {
+        //                    Batch.Draw(actualDic["top"], new Vector2(i* 32, j* 32), Color.White);
+        //            }
+        //            else if (j == Heigth - 1)
+        //            {
+                        
+        //                    Batch.Draw(actualDic["bottom"], new Vector2(i* 32, j* 32), Color.White);
+        //            }
+        //            else
+        //                Batch.Draw(actualDic["middle"], new Vector2(i* 32, j* 32), Color.White);
+
+
+
+        //        }
+        //    }
+        #endregion
 
         public delegate void WhenPressed();
     }
