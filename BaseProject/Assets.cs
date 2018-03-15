@@ -28,23 +28,27 @@ namespace BaseProject
             pixelW = Utils.CreateTexture(1, 1, Color.White);
             pixelB = Utils.CreateTexture(1, 1, Color.Black);
 
-            //SPRITE
-            heart = Main.content.Load<Texture2D>("heart");
-            skull = Main.content.Load<Texture2D>("skull");
-            bouton = Main.content.Load<Texture2D>("button");
+            #region DEMOGUI
+            LoadGUIDemo();
+            #endregion
 
-            buttonSet = Main.content.Load<Texture2D>("buttonset");
-            buttonSet2 = Main.content.Load<Texture2D>("buttonset2");
+            //SPRITE
+
             //SON
 
             //FONT
-            font = Main.content.Load<SpriteFont>("littlefont");
+            font = Main.content.Load<SpriteFont>("Assets/Fonts/littlefont");
 
-            LoadButtonSet();
+            LoadGUIDemo();
         }
 
-        private static void LoadButtonSet()
+        private static void LoadGUIDemo()
         {
+            heart = Main.content.Load<Texture2D>("DEMOS/DemoGUI/heart");
+            skull = Main.content.Load<Texture2D>("DEMOS/DemoGUI/skull");
+            buttonSet = Main.content.Load<Texture2D>("DEMOS/DemoGUI/buttonset");
+            buttonSet2 = Main.content.Load<Texture2D>("DEMOS/DemoGUI/buttonset2");
+
             buttonDic = new Dictionary<string, Texture2D>
             {
                 { "topleft", Utils.Slice(new Rectangle(0, 0, 32, 32), buttonSet) },

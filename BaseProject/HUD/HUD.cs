@@ -19,7 +19,7 @@ namespace BaseProject
 
         }
 
-        public void Draw(SpriteBatch batch)
+        public void Draw(SpriteBatch _batch)
         {
 
         }
