@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Newperfectmodelm.Utilitaire;
 using System.Collections.Generic;
 
 namespace Newperfectmodelm
@@ -41,6 +42,9 @@ namespace Newperfectmodelm
         bool set;
         Dictionary<string, Texture2D>[] list = new Dictionary<string, Texture2D>[2];
         Dictionary<string, Texture2D> actualDic;
+
+        ProgressBar pb;
+        
         public GameScreen()
             : base()
         {

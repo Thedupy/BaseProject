@@ -54,6 +54,7 @@
     <Compile Include="Son.cs" />
     <Compile Include="Sprite.cs" />
     <Compile Include="Utilitaire\GUI.cs" />
+    <Compile Include="Utilitaire\ProgressBar.cs" />
     <Compile Include="Utilitaire\Timer.cs" />
     <Compile Include="Utilitaire\Transition.cs" />
     <Compile Include="Utilitaire\Tween.cs" />
