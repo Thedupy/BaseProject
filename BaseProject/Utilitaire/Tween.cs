@@ -9,88 +9,88 @@ namespace BaseProject
 {
     public class TweenPosition
     {
-        public Entity owner;
-        public float time;
-        public Vector2 begin;
-        public Vector2 change;
-        public float duration;
-        public EaseFunction function;
+        public Entity Owner;
+        public float Time;
+        public Vector2 Begin;
+        public Vector2 Change;
+        public float Duration;
+        public EaseFunction Function;
 
-        public TweenPosition(Entity _entity)
+        public TweenPosition(Entity entity)
         {
-            owner = _entity;
-            time = 0;
-            begin = owner.position;
-            change = Vector2.Zero;
-            duration = 0;
-            function = EaseFunction.Linear;
+            Owner = entity;
+            Time = 0;
+            Begin = Owner.Position;
+            Change = Vector2.Zero;
+            Duration = 0;
+            Function = EaseFunction.Linear;
         }
 
-        public void Update(float _time, ref Vector2 _value)
+        public void Update(float time, ref Vector2 value)
         {
-            if (time < duration)
+            if (Time < Duration)
             {
-                time += _time;
-                _value.X = Ease.Easing(this.time, begin.X, change.X, duration, function);
-                _value.Y = Ease.Easing(this.time, begin.Y, change.Y, duration, function);
+                Time += time;
+                value.X = Ease.Easing(this.Time, Begin.X, Change.X, Duration, Function);
+                value.Y = Ease.Easing(this.Time, Begin.Y, Change.Y, Duration, Function);
             }
         }
 
-        public void Move(Vector2 _change, float _duration, EaseFunction _function = EaseFunction.Linear)
+        public void Move(Vector2 change, float duration, EaseFunction function = EaseFunction.Linear)
         {
-            begin = owner.position;
-            change = new Vector2(_change.X - owner.position.X, _change.Y - owner.position.Y);
-            duration = _duration;
-            function = _function;
-            time = 0;
+            Begin = Owner.Position;
+            Change = new Vector2(change.X - Owner.Position.X, change.Y - Owner.Position.Y);
+            Duration = duration;
+            Function = function;
+            Time = 0;
         }
     }
 
     public class TweenValue
     {
-        public float value;
-        public float time;
-        public float begin;
-        public float change;
-        public float duration;
-        public EaseFunction function;
+        public float Value;
+        public float Time;
+        public float Begin;
+        public float Change;
+        public float Duration;
+        public EaseFunction Function;
 
-        public Action<float> functor;
+        public Action<float> Functor;
 
-        public bool used, readyToRemove;
+        public bool Used, ReadyToRemove;
 
         public TweenValue()
         {
-            time = 0;
-            duration = 0;
-            function = EaseFunction.Linear;
-            used = readyToRemove = false;
+            Time = 0;
+            Duration = 0;
+            Function = EaseFunction.Linear;
+            Used = ReadyToRemove = false;
         }
 
-        public void Update(float _time)
+        public void Update(float time)
         {
-            if (time < duration)
+            if (Time < Duration)
             {
-                time += _time;
-                value = Ease.Easing(time, begin, change, duration, function);
-                functor(value);
+                Time += time;
+                Value = Ease.Easing(Time, Begin, Change, Duration, Function);
+                Functor(Value);
             }
 
-            if (used = true && time >= duration)
+            if (Used = true && Time >= Duration)
             {
-                readyToRemove = true;
+                ReadyToRemove = true;
             }
         }
 
-        public void Move(float _value, float _change, float _duration, EaseFunction _function, Action<float> _functor)
+        public void Move(float value, float change, float duration, EaseFunction function, Action<float> functor)
         {
-            functor = _functor;
-            begin = _value;
-            change = _change - begin;
-            duration = _duration;
-            function = _function;
-            time = 0;
-            used = true;
+            Functor = functor;
+            Begin = value;
+            Change = change - Begin;
+            Duration = duration;
+            Function = function;
+            Time = 0;
+            Used = true;
         }
     }
 
@@ -123,32 +123,32 @@ namespace BaseProject
     public static class Ease
     {
         //The TRIGGER
-        public static float Easing(float _t, float _b, float _c, float _d, EaseFunction _f)
+        public static float Easing(float t, float b, float c, float d, EaseFunction f)
         {
-            switch (_f)
+            switch (f)
             {
-                case EaseFunction.Linear: return LinearTween(_t, _b, _c, _d);
-                case EaseFunction.EaseInQuad: return EaseInQuad(_t, _b, _c, _d);
-                case EaseFunction.EaseOutQuad: return EaseOutQuad(_t, _b, _c, _d);
-                case EaseFunction.EaseInOutQuad: return EaseInOutQuad(_t, _b, _c, _d);
-                case EaseFunction.EaseInCubic: return EaseInCubic(_t, _b, _c, _d);
-                case EaseFunction.EaseOutCubic: return EaseOutCubic(_t, _b, _c, _d);
-                case EaseFunction.EaseInOutCubic: return EaseInOutCubic(_t, _b, _c, _d);
-                case EaseFunction.EaseInQuart: return EaseInQuart(_t, _b, _c, _d);
-                case EaseFunction.EaseOutQuart: return EaseOutQuart(_t, _b, _c, _d);
-                case EaseFunction.EaseInOutQuart: return EaseInOutQuart(_t, _b, _c, _d);
-                case EaseFunction.EaseInQuint: return EaseInQuint(_t, _b, _c, _d);
-                case EaseFunction.EaseOutQuint: return EaseOutQuint(_t, _b, _c, _d);
-                case EaseFunction.EaseInOutQuint: return EaseInOutQuint(_t, _b, _c, _d);
-                case EaseFunction.EaseInSine: return EaseInSine(_t, _b, _c, _d);
-                case EaseFunction.EaseOutSine: return EaseOutSine(_t, _b, _c, _d);
-                case EaseFunction.EaseInOutSine: return EaseInOutSine(_t, _b, _c, _d);
-                case EaseFunction.EaseInExpo: return EaseInExpo(_t, _b, _c, _d);
-                case EaseFunction.EaseOutExpo: return EaseOutExpo(_t, _b, _c, _d);
-                case EaseFunction.EaseInOutExpo: return EaseInOutExpo(_t, _b, _c, _d);
-                case EaseFunction.EaseInCirc: return EaseInCirc(_t, _b, _c, _d);
-                case EaseFunction.EaseOutCirc: return EaseOutCirc(_t, _b, _c, _d);
-                case EaseFunction.EaseInOutCirc: return EaseInOutCirc(_t, _b, _c, _d);
+                case EaseFunction.Linear: return LinearTween(t, b, c, d);
+                case EaseFunction.EaseInQuad: return EaseInQuad(t, b, c, d);
+                case EaseFunction.EaseOutQuad: return EaseOutQuad(t, b, c, d);
+                case EaseFunction.EaseInOutQuad: return EaseInOutQuad(t, b, c, d);
+                case EaseFunction.EaseInCubic: return EaseInCubic(t, b, c, d);
+                case EaseFunction.EaseOutCubic: return EaseOutCubic(t, b, c, d);
+                case EaseFunction.EaseInOutCubic: return EaseInOutCubic(t, b, c, d);
+                case EaseFunction.EaseInQuart: return EaseInQuart(t, b, c, d);
+                case EaseFunction.EaseOutQuart: return EaseOutQuart(t, b, c, d);
+                case EaseFunction.EaseInOutQuart: return EaseInOutQuart(t, b, c, d);
+                case EaseFunction.EaseInQuint: return EaseInQuint(t, b, c, d);
+                case EaseFunction.EaseOutQuint: return EaseOutQuint(t, b, c, d);
+                case EaseFunction.EaseInOutQuint: return EaseInOutQuint(t, b, c, d);
+                case EaseFunction.EaseInSine: return EaseInSine(t, b, c, d);
+                case EaseFunction.EaseOutSine: return EaseOutSine(t, b, c, d);
+                case EaseFunction.EaseInOutSine: return EaseInOutSine(t, b, c, d);
+                case EaseFunction.EaseInExpo: return EaseInExpo(t, b, c, d);
+                case EaseFunction.EaseOutExpo: return EaseOutExpo(t, b, c, d);
+                case EaseFunction.EaseInOutExpo: return EaseInOutExpo(t, b, c, d);
+                case EaseFunction.EaseInCirc: return EaseInCirc(t, b, c, d);
+                case EaseFunction.EaseOutCirc: return EaseOutCirc(t, b, c, d);
+                case EaseFunction.EaseInOutCirc: return EaseInOutCirc(t, b, c, d);
             }
 
             return 0;

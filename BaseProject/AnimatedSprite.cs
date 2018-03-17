@@ -10,35 +10,35 @@ namespace BaseProject
 {
     public class AnimatedSprite : Sprite
     {
-        public int frameWidth, frameHeight, frame, frameNumber;
-        public float animationTimer, delay;
-        public bool loop, inAnim, backTo;
+        public int FrameWidth, FrameHeight, Frame, FrameNumber;
+        public float AnimationTimer, Delay;
+        public bool Loop, InAnim, BackTo;
 
         public Rectangle FrameBox
         {
-            get { return new Rectangle(frame * frameWidth, 0, frameWidth, frameHeight); }
+            get { return new Rectangle(Frame * FrameWidth, 0, FrameWidth, FrameHeight); }
         }
 
         public new Rectangle Hitbox
         {
-            get { return new Rectangle((int)position.X, (int)position.Y, frameWidth, frameHeight); }
+            get { return new Rectangle((int)Position.X, (int)Position.Y, FrameWidth, FrameHeight); }
         }
 
-        public AnimatedSprite(Texture2D _texture, Vector2 _position, int _frameWidth, int _frameHeight, int _frameNumber)
-            : base(_texture, _position)
+        public AnimatedSprite(Texture2D texture, Vector2 position, int frameWidth, int frameHeight, int frameNumber)
+            : base(texture, position)
         {
-            frame = 0;
-            frameWidth = _frameWidth;
-            frameHeight = _frameHeight;
-            frameNumber = _frameNumber;
+            Frame = 0;
+            FrameWidth = frameWidth;
+            FrameHeight = frameHeight;
+            FrameNumber = frameNumber;
         }
 
-        public override void Update(float _time)
+        public override void Update(float time)
         {
-            if (inAnim)
+            if (InAnim)
             {
-                animationTimer += _time;
-                if (animationTimer >= delay)
+                AnimationTimer += time;
+                if (AnimationTimer >= Delay)
                 {
                     Anim();
                 }
@@ -47,35 +47,35 @@ namespace BaseProject
 
         private void Anim()
         {
-            if (frame == frameNumber - 1)
+            if (Frame == FrameNumber - 1)
             {
-                if (loop)
-                    frame = 0;
+                if (Loop)
+                    Frame = 0;
                 else
                 {
-                    if (backTo)
-                        frame = 0;
-                    inAnim = false;
+                    if (BackTo)
+                        Frame = 0;
+                    InAnim = false;
                 }
             }
             else
-                frame++;
+                Frame++;
 
-            animationTimer = 0;
+            AnimationTimer = 0;
         }
 
-        public void Animate(bool _loop, float _delay, bool _backto)
+        public void Animate(bool loop, float delay, bool backto)
         {
-            loop = _loop;
-            delay = _delay;
-            backTo = _backto;
+            Loop = loop;
+            Delay = delay;
+            BackTo = backto;
             Anim();
-            inAnim = true;
+            InAnim = true;
         }
 
-        public override void Draw(SpriteBatch _batch)
+        public override void Draw(SpriteBatch batch)
         {
-            _batch.Draw(texture, position, FrameBox, Color.White);
+            batch.Draw(Texture, Position, FrameBox, Color.White);
         }
     }
 }

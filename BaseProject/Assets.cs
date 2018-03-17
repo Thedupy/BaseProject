@@ -12,24 +12,24 @@ namespace BaseProject
     public class Assets
     {
         #region Variable
-        public static Texture2D pixelW, pixelB;
+        public static Texture2D PixelW, PixelB;
 
         //SPRITE
-        public static Texture2D heart, bouton, skull, buttonSet, buttonSet2;
-        public static Dictionary<string, Texture2D> buttonDic, buttonDic2;
+        public static Texture2D Heart, Bouton, Skull, ButtonSet, ButtonSet2;
+        public static Dictionary<string, Texture2D> ButtonDic, ButtonDic2;
         //SON
         //FONT
-        public static SpriteFont font;
+        public static SpriteFont Font;
         #endregion
 
         #region Methode
         public static void LoadAll()
         {
-            pixelW = Utils.CreateTexture(1, 1, Color.White);
-            pixelB = Utils.CreateTexture(1, 1, Color.Black);
+            PixelW = Utils.CreateTexture(1, 1, Color.White);
+            PixelB = Utils.CreateTexture(1, 1, Color.Black);
 
             #region DEMOGUI
-            LoadGUIDemo();
+            LoadGuiDemo();
             #endregion
 
             //SPRITE
@@ -37,42 +37,42 @@ namespace BaseProject
             //SON
 
             //FONT
-            font = Main.content.Load<SpriteFont>("Assets/Fonts/littlefont");
+            Font = Main.Content.Load<SpriteFont>("Assets/Fonts/littlefont");
 
-            LoadGUIDemo();
+            LoadGuiDemo();
         }
 
-        private static void LoadGUIDemo()
+        private static void LoadGuiDemo()
         {
-            heart = Main.content.Load<Texture2D>("DEMOS/DemoGUI/heart");
-            skull = Main.content.Load<Texture2D>("DEMOS/DemoGUI/skull");
-            buttonSet = Main.content.Load<Texture2D>("DEMOS/DemoGUI/buttonset");
-            buttonSet2 = Main.content.Load<Texture2D>("DEMOS/DemoGUI/buttonset2");
+            Heart = Main.Content.Load<Texture2D>("DEMOS/DemoGUI/heart");
+            Skull = Main.Content.Load<Texture2D>("DEMOS/DemoGUI/skull");
+            ButtonSet = Main.Content.Load<Texture2D>("DEMOS/DemoGUI/buttonset");
+            ButtonSet2 = Main.Content.Load<Texture2D>("DEMOS/DemoGUI/buttonset2");
 
-            buttonDic = new Dictionary<string, Texture2D>
+            ButtonDic = new Dictionary<string, Texture2D>
             {
-                { "topleft", Utils.Slice(new Rectangle(0, 0, 32, 32), buttonSet) },
-                { "top", Utils.Slice(new Rectangle(32, 0, 32, 32), buttonSet) },
-                { "topright", Utils.Slice(new Rectangle(64, 0, 32, 32), buttonSet) },
-                { "left", Utils.Slice(new Rectangle(0, 32, 32, 32), buttonSet) },
-                { "middle", Utils.Slice(new Rectangle(32, 32, 32, 32), buttonSet) },
-                { "right", Utils.Slice(new Rectangle(64, 32, 32, 32), buttonSet) },
-                { "bottomleft", Utils.Slice(new Rectangle(0, 64, 32, 32), buttonSet) },
-                { "bottom", Utils.Slice(new Rectangle(32, 64, 32, 32), buttonSet) },
-                { "bottomright", Utils.Slice(new Rectangle(64, 64, 32, 32), buttonSet) }
+                { "topleft", Utils.Slice(new Rectangle(0, 0, 32, 32), ButtonSet) },
+                { "top", Utils.Slice(new Rectangle(32, 0, 32, 32), ButtonSet) },
+                { "topright", Utils.Slice(new Rectangle(64, 0, 32, 32), ButtonSet) },
+                { "left", Utils.Slice(new Rectangle(0, 32, 32, 32), ButtonSet) },
+                { "middle", Utils.Slice(new Rectangle(32, 32, 32, 32), ButtonSet) },
+                { "right", Utils.Slice(new Rectangle(64, 32, 32, 32), ButtonSet) },
+                { "bottomleft", Utils.Slice(new Rectangle(0, 64, 32, 32), ButtonSet) },
+                { "bottom", Utils.Slice(new Rectangle(32, 64, 32, 32), ButtonSet) },
+                { "bottomright", Utils.Slice(new Rectangle(64, 64, 32, 32), ButtonSet) }
             };
 
-            buttonDic2 = new Dictionary<string, Texture2D>
+            ButtonDic2 = new Dictionary<string, Texture2D>
             {
-                { "topleft", Utils.Slice(new Rectangle(0, 0, 32, 32), buttonSet2) },
-                { "top", Utils.Slice(new Rectangle(32, 0, 32, 32), buttonSet2) },
-                { "topright", Utils.Slice(new Rectangle(64, 0, 32, 32), buttonSet2) },
-                { "left", Utils.Slice(new Rectangle(0, 32, 32, 32), buttonSet2) },
-                { "middle", Utils.Slice(new Rectangle(32, 32, 32, 32), buttonSet2) },
-                { "right", Utils.Slice(new Rectangle(64, 32, 32, 32), buttonSet2) },
-                { "bottomleft", Utils.Slice(new Rectangle(0, 64, 32, 32), buttonSet2) },
-                { "bottom", Utils.Slice(new Rectangle(32, 64, 32, 32), buttonSet2) },
-                { "bottomright", Utils.Slice(new Rectangle(64, 64, 32, 32), buttonSet2) }
+                { "topleft", Utils.Slice(new Rectangle(0, 0, 32, 32), ButtonSet2) },
+                { "top", Utils.Slice(new Rectangle(32, 0, 32, 32), ButtonSet2) },
+                { "topright", Utils.Slice(new Rectangle(64, 0, 32, 32), ButtonSet2) },
+                { "left", Utils.Slice(new Rectangle(0, 32, 32, 32), ButtonSet2) },
+                { "middle", Utils.Slice(new Rectangle(32, 32, 32, 32), ButtonSet2) },
+                { "right", Utils.Slice(new Rectangle(64, 32, 32, 32), ButtonSet2) },
+                { "bottomleft", Utils.Slice(new Rectangle(0, 64, 32, 32), ButtonSet2) },
+                { "bottom", Utils.Slice(new Rectangle(32, 64, 32, 32), ButtonSet2) },
+                { "bottomright", Utils.Slice(new Rectangle(64, 64, 32, 32), ButtonSet2) }
             };
         }
         #endregion

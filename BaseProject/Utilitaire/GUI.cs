@@ -1,158 +1,154 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BaseProject
 {
-    public class UIManager
+    public class UiManager
     {
-        public UIManager()
+        public UiManager()
         {
         }
 
-        public static void Update(float _time)
+        public static void Update(float time)
         {
-           
-            for (int i = 0; i < listParticles.Count; i++)
+
+            for (var i = 0; i < ListParticles.Count; i++)
             {
-                listParticles[i].Update(_time);
+                ListParticles[i].Update(time);
             }
-            listParticles.RemoveAll(k => k.ended == true);
+            ListParticles.RemoveAll(k => k.Ended == true);
         }
 
-        public static void Draw(SpriteBatch _batch)
+        public static void Draw(SpriteBatch batch)
         {
-            
-            for (int i = 0; i < listParticles.Count; i++)
+
+            for (var i = 0; i < ListParticles.Count; i++)
             {
-                listParticles[i].Draw(_batch);
+                ListParticles[i].Draw(batch);
             }
         }
 
         //GESTION PARTICLE
-        public static void AddParticle(UI par)
+        public static void AddParticle(Ui par)
         {
-            listParticles.Add(par);
+            ListParticles.Add(par);
         }
 
-        public static List<UI> listParticles = new List<UI>();
+        public static List<Ui> ListParticles = new List<Ui>();
     }
 
-    public class UI
+    public class Ui
     {
-        public Vector2 position;
-        public bool ended = false;
-        public float timer;
+        public Vector2 Position;
+        public bool Ended = false;
+        public float Timer;
 
-        public UI(Vector2 _position)
+        public Ui(Vector2 position)
         {
-            this.position = _position;
+            this.Position = position;
         }
 
-        public virtual void Update(float _time)
+        public virtual void Update(float time)
         {
         }
 
-        public virtual void Draw(SpriteBatch _batch)
+        public virtual void Draw(SpriteBatch batch)
         {
             //batch.Draw(Texture, Position, Color.White);
         }
 
     }
 
-    public class UILabel : UI
+    public class UiLabel : Ui
     {
-        Color color;
-        float delay;
-        float speed;
-        string text;
-        Texture2D texture;
+        Color _color;
+        float _delay;
+        float _speed;
+        string _text;
+        Texture2D _texture;
 
-        public UILabel(string _text, Vector2 _position, float _delay, float _speed, Color _color) : base(_position)
+        public UiLabel(string text, Vector2 position, float delay, float speed, Color color) : base(position)
         {
-            this.color = _color;
-            this.delay = _delay;
-            this.speed = _speed;
-            this.text = _text;
+            this._color = color;
+            this._delay = delay;
+            this._speed = speed;
+            this._text = text;
         }
 
-        public UILabel(Texture2D _texture, Vector2 _position, float _delay, float _speed) : base(_position)
+        public UiLabel(Texture2D texture, Vector2 position, float delay, float speed) : base(position)
         {
-            this.texture = _texture;
-            this.delay = _delay;
-            this.speed = _speed;
+            this._texture = texture;
+            this._delay = delay;
+            this._speed = speed;
         }
 
-        public override void Update(float _time)
+        public override void Update(float time)
         {
-            timer += _time;
-            if (timer < delay)
+            Timer += time;
+            if (Timer < _delay)
             {
-                position.Y -= speed;
+                Position.Y -= _speed;
             }
             else
-                ended = true;
+                Ended = true;
         }
 
-        public override void Draw(SpriteBatch _batch)
+        public override void Draw(SpriteBatch batch)
         {
-            if (text != null)
-                _batch.DrawString(Assets.font, text, position, color);
+            if (_text != null)
+                batch.DrawString(Assets.Font, _text, Position, _color);
             else
-                _batch.Draw(texture, position, Color.White);
+                batch.Draw(_texture, Position, Color.White);
         }
     }
 
-    public class UIButton : UI
+    public class UiButton : Ui
     {
-        Texture2D texture;
-        Rectangle bounds;
-        Color normalColor, survoledColor, actualColor;
-        WhenPressed action;
+        Texture2D _texture;
+        Rectangle _bounds;
+        Color _normalColor, _survoledColor, _actualColor;
+        WhenPressed _action;
 
-        public UIButton(Vector2 _position, int _width, int _height, Color _normalColor, Color _survoledColor, WhenPressed _action, Texture2D _texture = null) : base(_position)
+        public UiButton(Vector2 position, int width, int height, Color normalColor, Color survoledColor, WhenPressed action, Texture2D texture = null) : base(position)
         {
-            bounds = new Rectangle((int)_position.X, (int)_position.Y, _width, _height);
-            normalColor = _normalColor;
-            survoledColor = _survoledColor;
-            action = _action;
-            if (_texture != null)
-                texture = _texture;
+            _bounds = new Rectangle((int)position.X, (int)position.Y, width, height);
+            this._normalColor = normalColor;
+            this._survoledColor = survoledColor;
+            this._action = action;
+            if (texture != null)
+                this._texture = texture;
         }
 
-        public UIButton(Vector2 _position, int _width, int _height, WhenPressed _action, Texture2D _texture) : base(_position)
+        public UiButton(Vector2 position, int width, int height, WhenPressed action, Texture2D texture) : base(position)
         {
-            bounds = new Rectangle((int)_position.X, (int)_position.Y, _width, _height);
-            this.action = _action;
-            this.texture = _texture;
+            _bounds = new Rectangle((int)position.X, (int)position.Y, width, height);
+            this._action = action;
+            this._texture = texture;
         }
 
-        public override void Update(float _time)
+        public override void Update(float time)
         {
-            if(Input.mouseBox.Intersects(bounds))
+            if (Input.MouseBox.Intersects(_bounds))
             {
-                actualColor = survoledColor;
-                if(Input.Left(true))
+                _actualColor = _survoledColor;
+                if (Input.Left(true))
                 {
-                    action.Invoke();
+                    _action.Invoke();
                 }
             }
-                else
+            else
             {
-                actualColor = normalColor;
+                _actualColor = _normalColor;
             }
         }
 
-        public override void Draw(SpriteBatch _batch)
+        public override void Draw(SpriteBatch batch)
         {
-            if (texture != null)
-                _batch.Draw(texture, position, Color.White);
+            if (_texture != null)
+                batch.Draw(_texture, Position, Color.White);
             else
-                _batch.Draw(Assets.pixelW, bounds, actualColor);
+                batch.Draw(Assets.PixelW, _bounds, _actualColor);
 
         }
 
@@ -185,7 +181,7 @@ namespace BaseProject
         //            }
         //            else if (j == Heigth - 1)
         //            {
-                        
+
         //                    Batch.Draw(actualDic["bottom"], new Vector2(i* 32, j* 32), Color.White);
         //            }
         //            else
@@ -200,64 +196,64 @@ namespace BaseProject
         public delegate void WhenPressed();
     }
 
-    public class UIPopup : UI
+    public class UiPopup : Ui
     {
-        public enum PopState { Open, Wait, Close};
-        PopState state;
-        Color actualColor, textColor;
-        Rectangle bounds;
-        string text;
-        int maxHeight;
+        public enum PopState { Open, Wait, Close };
+        PopState _state;
+        Color _actualColor, _textColor;
+        Rectangle _bounds;
+        string _text;
+        int _maxHeight;
 
-        public int _Height { get; }
-        public string _Text { get; }
+        public int Height { get; }
+        public string Text { get; }
 
-        public UIPopup(Vector2 _position, int _width, int _height, string _text, Color color, Color _textColor) : base(_position)
+        public UiPopup(Vector2 position, int width, int height, string text, Color color, Color textColor) : base(position)
         {
-            actualColor = color;
-            maxHeight = _height;
-            int prout = (int)((_position.Y + (_position.Y + _height)) / 2); 
-            bounds = new Rectangle((int)_position.X, prout, _width, 0);
-            _Height = _height;
-            _Text = _text;
-            text = _text;
-            textColor = _textColor;
-            state = PopState.Open;
+            _actualColor = color;
+            _maxHeight = height;
+            var prout = (int)((position.Y + (position.Y + height)) / 2);
+            _bounds = new Rectangle((int)position.X, prout, width, 0);
+            Height = height;
+            Text = text;
+            this._text = text;
+            this._textColor = textColor;
+            _state = PopState.Open;
         }
 
-        public override void Update(float _time)
+        public override void Update(float time)
         {
-            switch(state)
+            switch (_state)
             {
                 case PopState.Open:
-                    bounds.Y--;
-                    bounds.Height += 2;
+                    _bounds.Y--;
+                    _bounds.Height += 2;
 
-                    if (bounds.Height >= maxHeight)
-                        state = PopState.Wait;
+                    if (_bounds.Height >= _maxHeight)
+                        _state = PopState.Wait;
                     break;
                 case PopState.Wait:
-                    timer += _time;
-                    if (timer >= 2500)
+                    Timer += time;
+                    if (Timer >= 2500)
                     {
-                        state = PopState.Close;
+                        _state = PopState.Close;
                     }
                     break;
                 case PopState.Close:
-                    bounds.Y++;
-                    bounds.Height -= 2;
-                    if (bounds.Height < 0)
-                        ended = true;
+                    _bounds.Y++;
+                    _bounds.Height -= 2;
+                    if (_bounds.Height < 0)
+                        Ended = true;
                     break;
             }
-            
+
         }
 
-        public override void Draw(SpriteBatch _batch)
+        public override void Draw(SpriteBatch batch)
         {
-            _batch.Draw(Assets.pixelW, bounds, actualColor);
-            if(state == PopState.Wait)
-                _batch.DrawString(Assets.font, text, new Vector2(bounds.X, bounds.Y) + new Vector2((bounds.Width - Assets.font.MeasureString(text).X) / 2, (bounds.Height - Assets.font.MeasureString(text).Y) / 2), textColor);
+            batch.Draw(Assets.PixelW, _bounds, _actualColor);
+            if (_state == PopState.Wait)
+                batch.DrawString(Assets.Font, _text, new Vector2(_bounds.X, _bounds.Y) + new Vector2((_bounds.Width - Assets.Font.MeasureString(_text).X) / 2, (_bounds.Height - Assets.Font.MeasureString(_text).Y) / 2), _textColor);
 
         }
     }

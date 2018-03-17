@@ -1,67 +1,63 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace BaseProject
 {
 
     public static class TimerManager
     {
-        public static List<Timer> timers = new List<Timer>();
+        public static List<Timer> Timers = new List<Timer>();
 
-        public static void Update(float _time)
+        public static void Update(float time)
         {
-            for (int i = 0; i < timers.Count; i++)
+            for (var i = 0; i < Timers.Count; i++)
             {
-                timers[i].Update(_time);
+                Timers[i].Update(time);
             }
-            timers.RemoveAll(k => k.ended == true);
+            Timers.RemoveAll(k => k.Ended == true);
         }
     }
 
     public class Timer
     {
-        OnEnd action;
-        float time, delay;
-        bool counted;
-        int count;
+        OnEnd _action;
+        float _time, _delay;
+        bool _counted;
+        int _count;
 
-        public bool ended;
+        public bool Ended;
 
 
-        public Timer(float _delay, OnEnd _action, int _count = 0)
+        public Timer(float delay, OnEnd action, int count = 0)
         {
-            this.delay = _delay;
-            this.action = _action;
-            if (_count != 0)
+            this._delay = delay;
+            this._action = action;
+            if (count != 0)
             {
-                counted = true;
-                this.count = _count;
+                _counted = true;
+                this._count = count;
             }
             else
-                counted = false;
+                _counted = false;
 
-            ended = false;
+            Ended = false;
         }
 
 
-        public void Update(float _time)
+        public void Update(float time)
         {
-            this.time += _time;
-            if(this.time >= delay)
+            this._time += time;
+            if (this._time >= _delay)
             {
-                action.Invoke();
-                this.time = 0;
+                _action.Invoke();
+                this._time = 0;
                 //if (!Counted)
                 //    Ended = true;
-                if(counted)
+                if (_counted)
                 {
-                    if (count > 0)
-                        count--;
+                    if (_count > 0)
+                        _count--;
                     else
-                        ended = true;
+                        Ended = true;
                 }
             }
         }

@@ -9,14 +9,14 @@ namespace BaseProject.Utilitaire
         #region Fields
 
         // Processing fields
-        float width, height, percentUp, maxValue, currentValue;
-        bool withLabel = false;
+        float _width, _height, _percentUp, _maxValue, _currentValue;
+        bool _withLabel = false;
 
         // Graphics fields
-        Color color;
-        Texture2D barTexture, barBackgroundTexture;
-        Vector2 position;
-        SpriteFont font = Assets.font;
+        Color _color;
+        Texture2D _barTexture, _barBackgroundTexture;
+        Vector2 _position;
+        SpriteFont _font = Assets.Font;
 
         #endregion
 
@@ -28,24 +28,24 @@ namespace BaseProject.Utilitaire
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="_position">La position de la progress bar</param>
-        /// <param name="_width">La largeur</param>
-        /// <param name="_height">La hauteur</param>
-        /// <param name="_color">La couleur</param>
-        /// <param name="_maxValue">La valeur maximume possiblement atteinte</param>
-        /// <param name="_withLabel">Si la valeur est affichée au dessus de la progress bar sous ce format : valeur courante / valeur maximale</param>
-        public ProgressBar(Vector2 _position, float _width, float _height, Color _color, float _maxValue, bool _withLabel)
+        /// <param name="position">La position de la progress bar</param>
+        /// <param name="width">La largeur</param>
+        /// <param name="height">La hauteur</param>
+        /// <param name="color">La couleur</param>
+        /// <param name="maxValue">La valeur maximume possiblement atteinte</param>
+        /// <param name="withLabel">Si la valeur est affichée au dessus de la progress bar sous ce format : valeur courante / valeur maximale</param>
+        public ProgressBar(Vector2 position, float width, float height, Color color, float maxValue, bool withLabel)
         {
-            position = _position;
-            width = _width;
-            height = _height;
-            color = _color;
-            maxValue = _maxValue;
-            withLabel = _withLabel;
-            currentValue = _maxValue;
-            percentUp = (currentValue / this.maxValue) * _width;
-            barBackgroundTexture = Utils.CreateTexture((int)(_width + 4), (int)(_height + 4), _color * 0.5f);
-            barTexture = Utils.CreateTexture((int)percentUp, (int)_height, _color);
+            this._position = position;
+            this._width = width;
+            this._height = height;
+            this._color = color;
+            this._maxValue = maxValue;
+            this._withLabel = withLabel;
+            _currentValue = maxValue;
+            _percentUp = (_currentValue / this._maxValue) * width;
+            _barBackgroundTexture = Utils.CreateTexture((int)(width + 4), (int)(height + 4), color * 0.5f);
+            _barTexture = Utils.CreateTexture((int)_percentUp, (int)height, color);
 
         }
 
@@ -56,50 +56,50 @@ namespace BaseProject.Utilitaire
         /// <summary>
         /// Décrémente la progressBar
         /// </summary>
-        /// <param name="_value">La valeur à décrémenter</param>
-        public void DecreaseBar(int _value)
+        /// <param name="value">La valeur à décrémenter</param>
+        public void DecreaseBar(int value)
         {
-            currentValue -= _value;
-            if (currentValue <= 0)
+            _currentValue -= value;
+            if (_currentValue <= 0)
             {
-                currentValue = 0;
+                _currentValue = 0;
             }
         }
 
         /// <summary>
         /// Incrémente la progressBar
         /// </summary>
-        /// <param name="_value">La valeur à incrémenter</param>
-        public void IncreaseBar(int _value)
+        /// <param name="value">La valeur à incrémenter</param>
+        public void IncreaseBar(int value)
         {
-            currentValue += _value;
-            if (currentValue >= maxValue)
+            _currentValue += value;
+            if (_currentValue >= _maxValue)
             {
-                currentValue = maxValue;
+                _currentValue = _maxValue;
             }
         }
 
-        public void Update(float _time)
+        public void Update(float time)
         {
-            percentUp = (currentValue / maxValue) * width;
-            if (percentUp > 0)
+            _percentUp = (_currentValue / _maxValue) * _width;
+            if (_percentUp > 0)
             {
-                barTexture = Utils.CreateTexture((int)percentUp, (int)height, color);
+                _barTexture = Utils.CreateTexture((int)_percentUp, (int)_height, _color);
             }
         }
 
-        public void Draw(SpriteBatch _spriteBatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
 
-            if (withLabel)
+            if (_withLabel)
             {
-                string text = currentValue + "/" + maxValue;
-                _spriteBatch.DrawString(font, text, new Vector2(((position.X + barBackgroundTexture.Width / 2) - (font.MeasureString(text) / 2).X), position.Y - (height + font.MeasureString(text).Y) / 2), Color.White);
+                var text = _currentValue + "/" + _maxValue;
+                spriteBatch.DrawString(_font, text, new Vector2(((_position.X + _barBackgroundTexture.Width / 2) - (_font.MeasureString(text) / 2).X), _position.Y - (_height + _font.MeasureString(text).Y) / 2), Color.White);
             }
-            _spriteBatch.Draw(barBackgroundTexture, position, null, Color.White, 0f, Vector2.Zero, 1, SpriteEffects.None, 1);
-            if (percentUp > 0)
+            spriteBatch.Draw(_barBackgroundTexture, _position, null, Color.White, 0f, Vector2.Zero, 1, SpriteEffects.None, 1);
+            if (_percentUp > 0)
             {
-                _spriteBatch.Draw(barTexture, new Vector2(position.X + 2, position.Y + 2), null, Color.White, 0f, Vector2.Zero, 1, SpriteEffects.None, 1);
+                spriteBatch.Draw(_barTexture, new Vector2(_position.X + 2, _position.Y + 2), null, Color.White, 0f, Vector2.Zero, 1, SpriteEffects.None, 1);
             }
         }
 

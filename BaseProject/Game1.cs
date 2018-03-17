@@ -9,21 +9,21 @@ namespace BaseProject
     /// </summary>
     public class Game1 : Game
     {
-        GraphicsDeviceManager graphics;
+        GraphicsDeviceManager _graphics;
 
-        Main main;
+        Main _main;
 
         public Game1()
         {
-            graphics = new GraphicsDeviceManager(this);
+            _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
 
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            main = new Main(graphics, this);
-            main.Initialize();
+            _main = new Main(_graphics, this);
+            _main.Initialize();
             base.Initialize();
         }
 
@@ -37,25 +37,25 @@ namespace BaseProject
             // TODO: Unload any non ContentManager content here
         }
 
-        protected override void Update(GameTime _gameTime)
+        protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            main.Update(_gameTime.ElapsedGameTime.Milliseconds);
+            _main.Update(gameTime.ElapsedGameTime.Milliseconds);
             // TODO: Add your update logic here
 
-            base.Update(_gameTime);
+            base.Update(gameTime);
         }
 
 
-        protected override void Draw(GameTime _gameTime)
+        protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            main.Draw();
-            base.Draw(_gameTime);
+            _main.Draw();
+            base.Draw(gameTime);
         }
     }
 }

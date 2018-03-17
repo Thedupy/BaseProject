@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace BaseProject
 {
-    public class HUD
+    public class Hud
     {
-        public HUD()
+        public Hud()
         {
 
         }
@@ -19,7 +19,7 @@ namespace BaseProject
 
         }
 
-        public void Draw(SpriteBatch _batch)
+        public void Draw(SpriteBatch batch)
         {
 
         }

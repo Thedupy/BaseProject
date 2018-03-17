@@ -1,56 +1,51 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BaseProject
 {
     class Input
     {
-        private static KeyboardState oldK, currentK;
-        private static MouseState oldM, currentM;
+        private static KeyboardState _oldK, _currentK;
+        private static MouseState _oldM, _currentM;
 
-        public static Rectangle mouseBox;
-        public static Vector2 mousePos;
+        public static Rectangle MouseBox;
+        public static Vector2 MousePos;
 
         public static void Update()
         {
-            oldK = currentK;
-            oldM = currentM;
+            _oldK = _currentK;
+            _oldM = _currentM;
 
-            currentK = Keyboard.GetState();
-            currentM = Mouse.GetState();
+            _currentK = Keyboard.GetState();
+            _currentM = Mouse.GetState();
 
-            mouseBox = new Rectangle(currentM.X, currentM.Y, 1, 1);
-            mousePos = new Vector2(currentM.X, currentM.Y);
+            MouseBox = new Rectangle(_currentM.X, _currentM.Y, 1, 1);
+            MousePos = new Vector2(_currentM.X, _currentM.Y);
         }
 
-        public static bool KeyPressed(Keys _k, bool _u)
+        public static bool KeyPressed(Keys k, bool u)
         {
-            return _u ? (oldK[_k] == KeyState.Up && currentK[_k] == KeyState.Down) : (currentK[_k] == KeyState.Down);
+            return u ? (_oldK[k] == KeyState.Up && _currentK[k] == KeyState.Down) : (_currentK[k] == KeyState.Down);
         }
 
-        public static bool Left(bool _u)
+        public static bool Left(bool u)
         {
-            return _u ? (oldM.LeftButton == ButtonState.Released && currentM.LeftButton == ButtonState.Pressed) : (currentM.LeftButton == ButtonState.Pressed);
+            return u ? (_oldM.LeftButton == ButtonState.Released && _currentM.LeftButton == ButtonState.Pressed) : (_currentM.LeftButton == ButtonState.Pressed);
         }
 
-        public static bool Right(bool _u)
+        public static bool Right(bool u)
         {
-            return _u ? (oldM.RightButton == ButtonState.Released && currentM.RightButton == ButtonState.Pressed) : (currentM.RightButton == ButtonState.Pressed);
+            return u ? (_oldM.RightButton == ButtonState.Released && _currentM.RightButton == ButtonState.Pressed) : (_currentM.RightButton == ButtonState.Pressed);
         }
 
-        public static bool Middle(bool _u)
+        public static bool Middle(bool u)
         {
-            return _u ? (oldM.MiddleButton == ButtonState.Released && currentM.MiddleButton == ButtonState.Pressed) : (currentM.MiddleButton == ButtonState.Pressed);
+            return u ? (_oldM.MiddleButton == ButtonState.Released && _currentM.MiddleButton == ButtonState.Pressed) : (_currentM.MiddleButton == ButtonState.Pressed);
         }
 
-        public static bool MouseOn(Rectangle _source)
+        public static bool MouseOn(Rectangle source)
         {
-            return _source.Contains(mousePos);
+            return source.Contains(MousePos);
         }
     }
 }

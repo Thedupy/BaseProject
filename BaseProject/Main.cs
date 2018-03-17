@@ -11,56 +11,56 @@ namespace BaseProject
 {
     class Main
     {
-        public static GraphicsDeviceManager graphics;
-        public static GraphicsDevice device;
-        public static Game instance;
-        public static ContentManager content;
-        public static Random rand;
-        public static Screen currentScreen;
+        public static GraphicsDeviceManager Graphics;
+        public static GraphicsDevice Device;
+        public static Game Instance;
+        public static ContentManager Content;
+        public static Random Rand;
+        public static Screen CurrentScreen;
 
         public static int Width = 800, Height = 600;
 
         public Main(GraphicsDeviceManager graphics, Game game)
         {
-            Main.graphics = graphics;
-            device = graphics.GraphicsDevice;
-            instance = game;
-            content = game.Content;
-            rand = new Random();
+            Main.Graphics = graphics;
+            Device = graphics.GraphicsDevice;
+            Instance = game;
+            Content = game.Content;
+            Rand = new Random();
         }
 
         public void Initialize()
         {
             Assets.LoadAll();
 
-            graphics.PreferredBackBufferWidth = Width;
-            graphics.PreferredBackBufferHeight = Height;
-            graphics.SynchronizeWithVerticalRetrace = false;
-            graphics.ApplyChanges();
-            instance.IsMouseVisible = true;
+            Graphics.PreferredBackBufferWidth = Width;
+            Graphics.PreferredBackBufferHeight = Height;
+            Graphics.SynchronizeWithVerticalRetrace = false;
+            Graphics.ApplyChanges();
+            Instance.IsMouseVisible = true;
 
             SetScreen(new GameScreen());
 
         }
 
-        public void Update(float _time)
+        public void Update(float time)
         {
             Input.Update();
 
-            if (currentScreen != null) currentScreen.Update(_time);
+            if (CurrentScreen != null) CurrentScreen.Update(time);
         }
 
         public void Draw()
         {
-            device.Clear(Color.Black);
+            Device.Clear(Color.Black);
 
-            if (currentScreen != null) currentScreen.Draw();
+            if (CurrentScreen != null) CurrentScreen.Draw();
         }
 
-        public static void SetScreen(Screen _screen)
+        public static void SetScreen(Screen screen)
         {
-            currentScreen = _screen;
-            currentScreen.Create();
+            CurrentScreen = screen;
+            CurrentScreen.Create();
         }
     }
 }

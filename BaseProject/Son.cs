@@ -9,51 +9,51 @@ namespace BaseProject
 {
     public class Son
     {
-        SoundEffectInstance sound;
+        SoundEffectInstance _sound;
 
         
 
         public float Pitch
         {
-            get { return sound.Pitch; }
-            set { sound.Pitch = value; }
+            get { return _sound.Pitch; }
+            set { _sound.Pitch = value; }
         }
 
         public float Pan
         {
-            get { return sound.Pan; }
-            set { sound.Pan = value; }
+            get { return _sound.Pan; }
+            set { _sound.Pan = value; }
         }
 
         public float Volume
         {
-            get { return sound.Volume; }
-            set { sound.Volume = value; }
+            get { return _sound.Volume; }
+            set { _sound.Volume = value; }
         }
 
         public SoundState State
         {
-            get { return sound.State; }
+            get { return _sound.State; }
         }
 
         public Son(SoundEffect se)
         {
-            sound = se.CreateInstance();
+            _sound = se.CreateInstance();
         }
 
         public void Play()
         {
-            sound.Play();
+            _sound.Play();
         }
 
         public void Pause()
         {
-            sound.Pause();
+            _sound.Pause();
         }
 
         public void Stop()
         {
-            sound.Stop();
+            _sound.Stop();
         }
     }
 }
