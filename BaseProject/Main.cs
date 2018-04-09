@@ -1,5 +1,6 @@
 ﻿using BaseProject.Graphics;
 using BaseProject.Screens;
+using BaseProject.Utility;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
