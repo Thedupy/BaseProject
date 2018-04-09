@@ -42,7 +42,7 @@ namespace BaseProject
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            _main.Update(gameTime.ElapsedGameTime.Milliseconds);
+            _main.Update(gameTime);
             // TODO: Add your update logic here
 
             base.Update(gameTime);

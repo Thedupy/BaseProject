@@ -1,4 +1,6 @@
-﻿namespace BaseProject
+﻿using Microsoft.Xna.Framework;
+
+namespace BaseProject.Screens
 {
     public class GameScreen : Screen
     {
@@ -15,17 +17,18 @@
 
         }
 
-        public override void Update(float time)
+        public override void Update(GameTime time)
         {
-            UiManager.Update(time);
-            TimerManager.Update(time);
+
+            UiManager.Update(time.ElapsedGameTime.Milliseconds);
+            TimerManager.Update(time.ElapsedGameTime.Milliseconds);
         }
 
         public override void Draw()
         {
-            Batch.Begin();
-            UiManager.Draw(Batch);
-            Batch.End();
+            spriteBatch.Begin();
+            UiManager.Draw(spriteBatch);
+            spriteBatch.End();
         }
     }
 }

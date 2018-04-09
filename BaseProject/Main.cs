@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using BaseProject.Screens;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -39,18 +40,18 @@ namespace BaseProject
 
         }
 
-        public void Update(float time)
+        public void Update(GameTime time)
         {
             Input.Update();
 
-            if (CurrentScreen != null) CurrentScreen.Update(time);
+            CurrentScreen?.Update(time);
         }
 
         public void Draw()
         {
             Device.Clear(Color.Black);
 
-            if (CurrentScreen != null) CurrentScreen.Draw();
+            CurrentScreen?.Draw();
         }
 
         public static void SetScreen(Screen screen)

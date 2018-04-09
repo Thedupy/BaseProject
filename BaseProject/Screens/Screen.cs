@@ -1,34 +1,28 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace BaseProject
 {
-    public class Screen
+    public abstract class Screen
     {
-        public SpriteBatch Batch;
+        public SpriteBatch spriteBatch;
+
+
 
         public Screen()
         {
-            Batch = new SpriteBatch(Main.Device);
+            spriteBatch = new SpriteBatch(Main.Device);
         }
 
-        public virtual void Create()
+        public abstract void Create();
+
+        public abstract void Update(GameTime time);
+
+        public abstract void Draw();
+
+        public void Dispose()
         {
-
-        }
-
-        public virtual void Update(float time)
-        {
-
-        }
-
-        public virtual void Draw()
-        {
-
-        }
-
-        public virtual void Dispose()
-        {
-            Batch.Dispose();
+            spriteBatch.Dispose();
         }
     }
 
