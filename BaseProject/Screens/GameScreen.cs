@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using BaseProject.Utility;
+using Microsoft.Xna.Framework;
 
 namespace BaseProject.Screens
 {

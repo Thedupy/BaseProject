@@ -1,7 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+﻿using BaseProject.Graphics;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace BaseProject.Utilitaire
+namespace BaseProject.Utility
 {
     class ProgressBar
     {
