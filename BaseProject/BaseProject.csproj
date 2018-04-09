@@ -61,7 +61,6 @@
     <Compile Include="Entity.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="HUD\HUD.cs" />
-    <Compile Include="Input.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -70,6 +69,7 @@
     <Compile Include="Sounds\Sound.cs" />
     <Compile Include="Graphics\Sprite.cs" />
     <Compile Include="Utility\GUI.cs" />
+    <Compile Include="Utility\Input.cs" />
     <Compile Include="Utility\ProgressBar.cs" />
     <Compile Include="Utility\Timer.cs" />
     <Compile Include="Utility\Transition.cs" />
