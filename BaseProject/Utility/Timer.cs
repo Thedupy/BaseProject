@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace BaseProject
+namespace BaseProject.Utility
 {
 
     public static class TimerManager
@@ -9,32 +9,33 @@ namespace BaseProject
 
         public static void Update(float time)
         {
-            for (var i = 0; i < Timers.Count; i++)
+            foreach (var t in Timers)
             {
-                Timers[i].Update(time);
+                t.Update(time);
             }
+
             Timers.RemoveAll(k => k.Ended == true);
         }
     }
 
     public class Timer
     {
-        OnEnd _action;
-        float _time, _delay;
-        bool _counted;
-        int _count;
+        private OnEnd _action;
+        private float _time, _delay;
+        private bool _counted;
+        private int _count;
 
         public bool Ended;
 
 
         public Timer(float delay, OnEnd action, int count = 0)
         {
-            this._delay = delay;
-            this._action = action;
+            _delay = delay;
+            _action = action;
             if (count != 0)
             {
                 _counted = true;
-                this._count = count;
+                _count = count;
             }
             else
                 _counted = false;
@@ -45,11 +46,11 @@ namespace BaseProject
 
         public void Update(float time)
         {
-            this._time += time;
-            if (this._time >= _delay)
+            _time += time;
+            if (_time >= _delay)
             {
                 _action.Invoke();
-                this._time = 0;
+                _time = 0;
                 //if (!Counted)
                 //    Ended = true;
                 if (_counted)

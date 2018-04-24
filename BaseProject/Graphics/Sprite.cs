@@ -5,17 +5,14 @@ namespace BaseProject.Graphics
 {
     public class Sprite : Entity
     {
-        public Texture2D Texture;
 
-        public Rectangle Hitbox
-        {
-            get { return new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height); }
-        }
+        public Texture2D Texture { get; }
+        public Rectangle Hitbox => new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height);
 
         public Sprite(Texture2D texture, Vector2 position) : base(position)
         {
-            this.Texture = texture;
-            base.Position = position;
+            Texture = texture;
+            Position = position;
         }
 
         public virtual void Update(float time)

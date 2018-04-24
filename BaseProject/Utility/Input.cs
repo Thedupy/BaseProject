@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BaseProject.Utility
 {
-    class Input
+    public class Input
     {
         private static KeyboardState _oldK, _currentK;
         private static MouseState _oldM, _currentM;
