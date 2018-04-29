@@ -57,6 +57,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Graphics\AnimatedSprite.cs" />
+    <Compile Include="Graphics\Animation.cs" />
+    <Compile Include="Graphics\AnimationManager.cs" />
     <Compile Include="Graphics\Assets.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Game1.cs" />

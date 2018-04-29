@@ -1,76 +1,104 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using BaseProject.Utility;
 
 namespace BaseProject.Graphics
 {
-    public class AnimatedSprite : Sprite
+    public class AnimatedSprite
     {
-        public int FrameWidth, FrameHeight, Frame, FrameNumber;
-        public float AnimationTimer, Delay;
-        public bool Loop, InAnim, BackTo;
+        protected Texture2D _texture;
 
-        public Rectangle FrameBox
-        {
-            get { return new Rectangle(Frame * FrameWidth, 0, FrameWidth, FrameHeight); }
-        }
 
-        public new Rectangle Hitbox
-        {
-            get { return new Rectangle((int)Position.X, (int)Position.Y, FrameWidth, FrameHeight); }
-        }
+        protected AnimationManager _animationManager;
 
-        public AnimatedSprite(Texture2D texture, Vector2 position, int frameWidth, int frameHeight, int frameNumber)
-            : base(texture, position)
-        {
-            Frame = 0;
-            FrameWidth = frameWidth;
-            FrameHeight = frameHeight;
-            FrameNumber = frameNumber;
-        }
+        protected Dictionary<string, Animation> _animations;
 
-        public override void Update(float time)
+        protected Vector2 _position;
+
+
+        public Vector2 Position
         {
-            if (InAnim)
+            get { return _position; }
+            set
             {
-                AnimationTimer += time;
-                if (AnimationTimer >= Delay)
-                {
-                    Anim();
-                }
+                _position = value;
+
+                if (_animationManager != null)
+                    _animationManager.Position = _position;
             }
         }
 
-        private void Anim()
+        public float Speed = 1f;
+
+        public Vector2 Velocity;
+
+        public AnimatedSprite(Texture2D texture)
         {
-            if (Frame == FrameNumber - 1)
+            _texture = texture;
+        }
+
+        public AnimatedSprite(Dictionary<string, Animation> animations)
+        {
+            _animations = animations;
+            _animationManager = new AnimationManager(_animations.First().Value);
+        }
+
+        
+        
+
+        public void Update(GameTime time)
+        {
+            Move();
+
+            if (_animationManager != null)
             {
-                if (Loop)
-                    Frame = 0;
-                else
-                {
-                    if (BackTo)
-                        Frame = 0;
-                    InAnim = false;
-                }
+                SetAnimation();
+                _animationManager.Update(time);
             }
+            Position += Velocity;
+        }
+
+        private void SetAnimation()
+        {
+            if (Velocity.X > 0)
+                _animationManager.Play(_animations["WalkRight"]);
+            else if (Velocity.X < 0)
+                _animationManager.Play(_animations["WalkLeft"]);
+            else if (Velocity.Y > 0)
+                _animationManager.Play(_animations["WalkDown"]);
+            else if (Velocity.Y < 0)
+                _animationManager.Play(_animations["WalkUp"]);
             else
-                Frame++;
-
-            AnimationTimer = 0;
+                _animationManager.Stop();
         }
 
-        public void Animate(bool loop, float delay, bool backto)
+        public void Move()
         {
-            Loop = loop;
-            Delay = delay;
-            BackTo = backto;
-            Anim();
-            InAnim = true;
+            if (Input.KeyPressed(Keys.Z, false))
+                Velocity.Y = -Speed;
+            else if (Input.KeyPressed(Keys.S, false))
+                Velocity.Y = Speed;
+            else
+                Velocity.Y = 0;
+
+            if (Input.KeyPressed(Keys.Q, false))
+                Velocity.X = -Speed;
+            else if (Input.KeyPressed(Keys.D, false))
+                Velocity.X = Speed;
+            else
+                Velocity.X = 0;
         }
 
-        public override void Draw(SpriteBatch batch)
+        public void Draw(SpriteBatch batch)
         {
-            batch.Draw(Texture, Position, FrameBox, Color.White);
+            if (_texture != null)
+                batch.Draw(_texture, Position, Color.White);
+            else if (_animationManager != null)
+                _animationManager.Draw(batch);
         }
     }
 }
