@@ -23,6 +23,16 @@ namespace BaseProject.Utility
             MousePos = new Vector2(_currentM.X, _currentM.Y);
         }
 
+        public static bool WheelDown()
+        {
+            return _currentM.ScrollWheelValue < _oldM.ScrollWheelValue;
+        }
+
+        public static bool WheelUp()
+        {
+            return _currentM.ScrollWheelValue > _oldM.ScrollWheelValue;
+        }
+
         public static bool KeyPressed(Keys k, bool u)
         {
             return u ? (_oldK[k] == KeyState.Up && _currentK[k] == KeyState.Down) : (_currentK[k] == KeyState.Down);
