@@ -5,7 +5,7 @@ namespace BaseProject
     public class Entity
     {
         protected Vector2 _position;
-        protected Vector2 _velocity;
+        protected Vector2 _velocity = Vector2.Zero;
 
         public Entity(Vector2 position)
         {

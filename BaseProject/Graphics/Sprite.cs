@@ -5,30 +5,65 @@ namespace BaseProject.Graphics
 {
     public class Sprite : Entity
     {
+        #region Fields
 
         public Texture2D Texture { get; }
-        public Rectangle Hitbox => new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height);
+        protected Texture2D _hitboxTexture;
+
+        protected Rectangle _hitbox;
+
+        public bool DisplayHitbox { get; set; } = false;
+
+        public Rectangle Hitbox => _hitbox;
+
+        #endregion
+
+        #region Constructor(s)
 
         public Sprite(Texture2D texture, Vector2 position) : base(position)
         {
             Texture = texture;
-            Position = position;
+            _position = position;
+            _hitbox = new Rectangle((int)_position.X, (int)_position.Y, Texture.Width, Texture.Height);
+            _hitboxTexture = Utils.CreateContouringTexture(Hitbox.Width, Hitbox.Height, Color.Red);
         }
 
-        public virtual void Update(float time)
+        #endregion
+
+        #region Privates Methods
+
+        private void UpdateHitbox()
+        {
+            _hitbox.X = (int)Position.X;
+            _hitbox.Y = (int)Position.Y;
+        }
+
+        #endregion
+
+        #region Publics Methods
+
+
+
+        #endregion
+
+        #region Update & Draw Methods
+
+        public virtual void Update(GameTime time)
         {
 
+
+            UpdateHitbox();
         }
 
-        public virtual void Draw(SpriteBatch batch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
-            batch.Draw(Texture, Position, Color.White);
+            spriteBatch.Draw(Texture, Position, Color.White);
 
-            ////DECOMMENTER SI BESOIN DE DESSINER LES HITBOX
-            //Texture2D tex = Assets.CreateTexture(hitbox.Width, hitbox.Height, new Color(255, 0, 0, 50));
-            //if (tex != null)
-            //    batch.Draw(tex, hitbox, Color.White);
+            if (DisplayHitbox)
+                spriteBatch.Draw(_hitboxTexture, Hitbox, Color.White);
         }
+
+        #endregion
 
     }
 }
