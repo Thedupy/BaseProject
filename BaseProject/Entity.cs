@@ -1,19 +1,27 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BaseProject
 {
     public class Entity
     {
-        public Vector2 Position;
+        protected Vector2 _position;
+        protected Vector2 _velocity;
 
         public Entity(Vector2 position)
         {
             Position = position;
+        }
+
+        public Vector2 Position
+        {
+            get => _position;
+            set => _position = value;
+        }
+
+        public Vector2 Velocity
+        {
+            get => _velocity;
+            set => _velocity = value;
         }
     }
 }
