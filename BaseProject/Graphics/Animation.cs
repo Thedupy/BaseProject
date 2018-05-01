@@ -17,19 +17,29 @@ namespace BaseProject.Graphics
 
         public int FrameHeight { get { return Texture.Height; } }
 
-        public int FrameWidth { get { return Texture.Width /FrameCount; } }
+        public int FrameWidth { get { return Texture.Width / FrameCount; } }
 
         public bool IsLooping { get; set; }
 
+        public bool IsOneShot { get; private set; }
+
         public Texture2D Texture { get; private set; }
 
-        public Animation(Texture2D texture, int frameCount)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="texture">Texture de l'animation</param>
+        /// <param name="frameCount">Nombre de Frame</param>
+        /// <param name="delay"></param>Millisecondes entre chaque frames</param>
+        /// <param name="isOneShot">true si l'animation ne se joue qu'une fois, false sinon</param>
+        public Animation(Texture2D texture, int frameCount, float delay, bool isOneShot)
         {
             Texture = texture;
             FrameCount = frameCount;
             IsLooping = true;
+            IsOneShot = isOneShot;
 
-            FrameSpeed = 0.2f;
+            FrameSpeed = delay;
         }
     }
 }

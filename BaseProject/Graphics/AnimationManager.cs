@@ -1,20 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BaseProject.Graphics
 {
     public class AnimationManager
     {
-        private Animation _animation;
+        private bool OneShotPlaying;
+
+        private Animation _animation, defaultAnimation;
 
         private float _timer;
 
-        public Vector2 Position { get; set; }
+        public Vector2 Position;
 
         public AnimationManager(Animation animation)
         {
@@ -23,8 +20,14 @@ namespace BaseProject.Graphics
 
         public void Play(Animation animation)
         {
-            if (_animation == animation)
+            if (OneShotPlaying || _animation == animation)
                 return;
+
+            if (animation.IsOneShot)
+            {
+                OneShotPlaying = true;
+                defaultAnimation = _animation;
+            }
 
             _animation = animation;
 
@@ -35,6 +38,16 @@ namespace BaseProject.Graphics
 
         public void Stop()
         {
+            if (!OneShotPlaying)
+            {
+                _timer = 0f;
+
+                _animation.CurrentFrame = 0;
+            }
+        }
+
+        public void Pause()
+        {
             _timer = 0f;
 
             _animation.CurrentFrame = 0;
@@ -42,7 +55,7 @@ namespace BaseProject.Graphics
 
         public void Update(GameTime time)
         {
-            _timer += (float)time.ElapsedGameTime.TotalSeconds;
+            _timer += time.ElapsedGameTime.Milliseconds;
 
             if (_timer > _animation.FrameSpeed)
             {
@@ -51,7 +64,17 @@ namespace BaseProject.Graphics
                 _animation.CurrentFrame++;
 
                 if (_animation.CurrentFrame >= _animation.FrameCount)
-                    _animation.CurrentFrame = 0;
+                {
+                    if (OneShotPlaying)
+                    {
+                        OneShotPlaying = false;
+                        _animation = defaultAnimation;
+                    }
+                    else
+                    {
+                        _animation.CurrentFrame = 0;
+                    }
+                }
             }
         }
 
@@ -67,5 +90,5 @@ namespace BaseProject.Graphics
         }
 
 
-}
+    }
 }
