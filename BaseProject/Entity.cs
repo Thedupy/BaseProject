@@ -2,15 +2,12 @@
 
 namespace BaseProject
 {
-    public class Entity
+    public abstract class Entity
     {
+        #region Fields
+
         protected Vector2 _position;
         protected Vector2 _velocity = Vector2.Zero;
-
-        public Entity(Vector2 position)
-        {
-            Position = position;
-        }
 
         public Vector2 Position
         {
@@ -23,5 +20,16 @@ namespace BaseProject
             get => _velocity;
             set => _velocity = value;
         }
+
+        #endregion
+
+        #region Constructor(s)
+
+        protected Entity(Vector2 position)
+        {
+            Position = position;
+        }
+
+        #endregion
     }
 }

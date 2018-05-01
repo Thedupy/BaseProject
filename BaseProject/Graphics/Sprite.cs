@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using BaseProject.Utility;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace BaseProject.Graphics
@@ -20,6 +21,11 @@ namespace BaseProject.Graphics
 
         #region Constructor(s)
 
+        /// <summary>
+        /// Sprite base constructor
+        /// </summary>
+        /// <param name="texture">The texture of the sprite</param>
+        /// <param name="position">The position of the sprite</param>
         public Sprite(Texture2D texture, Vector2 position) : base(position)
         {
             Texture = texture;
@@ -32,6 +38,9 @@ namespace BaseProject.Graphics
 
         #region Privates Methods
 
+        /// <summary>
+        /// Update the hitbox position
+        /// </summary>
         private void UpdateHitbox()
         {
             _hitbox.X = (int)Position.X;
@@ -50,15 +59,12 @@ namespace BaseProject.Graphics
 
         public virtual void Update(GameTime time)
         {
-
-
             UpdateHitbox();
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Texture, Position, Color.White);
-
             if (DisplayHitbox)
                 spriteBatch.Draw(_hitboxTexture, Hitbox, Color.White);
         }

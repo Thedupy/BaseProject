@@ -17,8 +17,6 @@ namespace BaseProject
         public static Random Rand;
         public static Screen CurrentScreen;
 
-        public static int Width = 800, Height = 600;
-
         public Main(GraphicsDeviceManager graphics, Game game)
         {
             Main.Graphics = graphics;
@@ -32,8 +30,8 @@ namespace BaseProject
         {
             Assets.LoadAll();
 
-            Graphics.PreferredBackBufferWidth = Width;
-            Graphics.PreferredBackBufferHeight = Height;
+            Graphics.PreferredBackBufferWidth = Utils.WindowWidth;
+            Graphics.PreferredBackBufferHeight = Utils.WindowHeight;
             Graphics.SynchronizeWithVerticalRetrace = false;
             Graphics.ApplyChanges();
             Instance.IsMouseVisible = true;

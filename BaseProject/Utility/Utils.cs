@@ -1,30 +1,39 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace BaseProject
+namespace BaseProject.Utility
 {
-    class Utils
+    public static class Utils
     {
-        //DESSIN DE HITBOX
-        public static Texture2D CreateTexture(int w, int h, Color col)
+
+        public const int WindowWidth = 1600, WindowHeight = 900;
+
+        /// <summary>
+        /// Create a texture
+        /// </summary>
+        /// <param name="width">The width of the texture</param>
+        /// <param name="height">The height of the texture</param>
+        /// <param name="color">The color of the texture</param>
+        /// <returns>The created Texture2D</returns>
+        public static Texture2D CreateTexture(int width, int height, Color color)
         {
-            var texture = new Texture2D(Main.Device, w, h);
-            var cols = new Color[w * h];
-            for (var i = 0; i < cols.Length; i++)
+            var texture = new Texture2D(Main.Device, width, height);
+            var colors = new Color[width * height];
+            for (var i = 0; i < colors.Length; i++)
             {
-                cols[i] = col;
+                colors[i] = color;
             }
-            texture.SetData(cols);
+            texture.SetData(colors);
             return texture;
         }
 
         /// <summary>
-        /// Dessine une texture creuse, avec seulement les contours
+        /// Create an empty texture with only the contouring 
         /// </summary>
-        /// <param name="width">La largeur</param>
-        /// <param name="height">La hauteur</param>
-        /// <param name="color">La couleur</param>
-        /// <returns>Retourne la texture sous forme Texture2D</returns>
+        /// <param name="width">The width of the texture</param>
+        /// <param name="height">The height of the texture</param>
+        /// <param name="color">The color of the texture</param>
+        /// <returns>The created Textured2D</returns>
         public static Texture2D CreateContouringTexture(int width, int height, Color color)
         {
             var texture = new Texture2D(Main.Device, width, height);
