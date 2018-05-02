@@ -14,11 +14,11 @@ Projet de base pour [Monogame](http://www.monogame.net/ "Monogame website : http
 - Mathieu Ducournau - *Initial Idea* - [Dupy](https://github.com/Thedupy) 
 - Frank Thermeau - *Contributor* - [Horow](https://github.com/Fractaos)
 
-##Coding rules
+## Coding rules
 
 Les classes sont séparées en `#region` sous cette forme :
 
-![](D:\Users\Frank\Desktop\unknown.png)
+![](https://i.imgur.com/kGJ8SDw.png)
 
 
 
