@@ -1,9 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace BaseProject
 {
-    class Utils
+    public static class Utils
     {
         //DESSIN DE HITBOX
         public static Texture2D CreateTexture(int w, int h, Color col)
@@ -57,6 +58,40 @@ namespace BaseProject
             var bufferTexture = new Texture2D(Main.Device, region.Width, region.Height);
             bufferTexture.SetData(rawdata);
             return bufferTexture;
+        }
+
+        public static float GetHorizontalIntersectionDepth(this Rectangle rectA, Rectangle rectB)
+        {
+            float halfWidthA = rectA.Width / 2.0f;
+            float halfWidthB = rectB.Width / 2.0f;
+
+            float centerA = rectA.Left + halfWidthA;
+            float centerB = rectB.Left + halfWidthB;
+
+            float distanceX = centerA - centerB;
+            float minDistanceX = halfWidthA + halfWidthB;
+
+            if (Math.Abs(distanceX) >= minDistanceX)
+                return 0f;
+
+            return distanceX > 0 ? minDistanceX - distanceX : -minDistanceX - distanceX;
+        }
+
+        public static float GetVerticalIntersectionDepth(this Rectangle rectA, Rectangle rectB)
+        {
+            float halfHeightA = rectA.Height / 2.0f;
+            float halfHeightB = rectB.Height / 2.0f;
+
+            float centerA = rectA.Top + halfHeightA;
+            float centerB = rectB.Top + halfHeightB;
+
+            float distanceY = centerA - centerB;
+            float minDistanceY = halfHeightA + halfHeightB;
+
+            if (Math.Abs(distanceY) >= minDistanceY)
+                return 0f;
+
+            return distanceY > 0 ? minDistanceY - distanceY : -minDistanceY - distanceY;
         }
     }
 }
