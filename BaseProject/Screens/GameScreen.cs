@@ -9,7 +9,7 @@ namespace BaseProject.Screens
 {
     public class GameScreen : Screen
     {
-        AnimatedSprite sprite;
+        Sprite sprite;
 
         public GameScreen()
             : base()
@@ -28,7 +28,7 @@ namespace BaseProject.Screens
                 {"Action", new Animation(Main.Content.Load<Texture2D>("Assets/Graphics/action"), 3, 0.1f, true) },
                 {"Tir", new Animation(Main.Content.Load<Texture2D>("Assets/Graphics/tir"), 6, 500/6, true) }
             };
-            sprite = new AnimatedSprite(animations, new Vector2(100, 100));
+            sprite = new Sprite(animations, new Vector2(100, 100));
         }
 
         public override void Update(GameTime time)
