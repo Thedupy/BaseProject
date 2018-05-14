@@ -67,7 +67,7 @@ namespace BaseProject.Utility
 
         public void Draw(SpriteBatch batch)
         {
-            batch.Draw(Texture, new Rectangle(0, 0, Main.Width, Main.Height), new Color(0, 0, 0, MathHelper.Clamp(_alphaValue, 0, 255)));
+            batch.Draw(Texture, new Rectangle(0, 0, Utils.WindowWidth, Utils.WindowHeight), new Color(0, 0, 0, MathHelper.Clamp(_alphaValue, 0, 255)));
         }
     }
 }

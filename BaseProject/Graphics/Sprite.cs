@@ -38,10 +38,15 @@ namespace BaseProject.Graphics
 
         #region Privates Methods
 
+
+        #endregion
+
+        #region Publics Methods
+
         /// <summary>
         /// Update the hitbox position
         /// </summary>
-        private void UpdateHitbox()
+        public void UpdateHitbox()
         {
             _hitbox.X = (int)Position.X;
             _hitbox.Y = (int)Position.Y;
@@ -49,16 +54,11 @@ namespace BaseProject.Graphics
 
         #endregion
 
-        #region Publics Methods
-
-
-
-        #endregion
-
         #region Update & Draw Methods
 
         public virtual void Update(GameTime time)
         {
+            Position += Velocity;
             UpdateHitbox();
         }
 

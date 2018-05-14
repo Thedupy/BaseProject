@@ -56,9 +56,10 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Graphics\Assets.cs" />
+    <Compile Include="Collisions\CollisionUtils.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="Graphics\PlayerExample.cs" />
     <Compile Include="HUD\HUD.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Program.cs" />
@@ -71,7 +72,6 @@
     <Compile Include="Utility\Input.cs" />
     <Compile Include="Utility\ProgressBar.cs" />
     <Compile Include="Utility\Timer.cs" />
-    <Compile Include="Utility\Transition.cs" />
     <Compile Include="Utility\Tween.cs" />
     <Compile Include="Utility\Utils.cs" />
   </ItemGroup>
