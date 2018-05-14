@@ -6,23 +6,20 @@ namespace BaseProject.Collisions
 {
     public static class CollisionUtils
     {
+        #region Fields
+
+        public static List<Sprite> Collidable { get; set; }
+
+        #endregion
+
         #region Public Methods
 
-        public static bool IsCollisionFree(Rectangle currentRectangle, List<Rectangle> othersRectangles)
+        public static void ProcessCollision(Sprite player)
         {
-            foreach (var otherRectangle in othersRectangles)
+            foreach (var sprite in Collidable)
             {
-                if (currentRectangle.Intersects(otherRectangle))
-                    return false;
+                var distance = new Vector2();
             }
-
-            return true;
-        }
-
-        public static CollisionResolutionInfo CheckCollision(float timeStep, Sprite firstSprite, Sprite secondSprite)
-        {
-            //TODO : à faire
-            return null;
         }
 
         #endregion
