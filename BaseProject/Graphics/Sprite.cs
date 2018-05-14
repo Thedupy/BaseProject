@@ -58,7 +58,7 @@ namespace BaseProject.Graphics
 
         public virtual void Update(GameTime time)
         {
-            Position += Velocity;
+            //Position += Velocity;
             UpdateHitbox();
         }
 

@@ -1,4 +1,5 @@
-﻿using BaseProject.Utility;
+﻿using BaseProject.Collisions;
+using BaseProject.Utility;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -32,6 +33,8 @@ namespace BaseProject.Graphics
         public override void Update(GameTime time)
         {
             Move();
+            Position += Velocity;
+            CollisionUtils.ProcessCollision(this);
             base.Update(time);
         }
     }
