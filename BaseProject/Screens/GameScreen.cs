@@ -24,18 +24,18 @@ namespace BaseProject.Screens
             {
                 DisplayHitbox = true
             };
-            _walls = new List<Sprite> { new Sprite(Utils.CreateTexture(15, 20, Color.Blue), new Vector2(25, 200)) };
+            _walls = new List<Sprite> { new Sprite(Utils.CreateTexture(15, 20, Color.Blue), new Vector2(25, 200)), new Sprite(Utils.CreateTexture(50, 100, Color.White), new Vector2(200, 60)) };
             foreach (var sprite in _walls)
             {
                 sprite.DisplayHitbox = true;
             }
-            CollisionUtils.Collidable = _walls;
         }
 
         public override void Update(GameTime time)
         {
 
             _walls.ForEach(wall => wall.Update(time));
+            CollisionUtils.Collidable = _walls;
             _player.Update(time);
             UiManager.Update(time.ElapsedGameTime.Milliseconds);
             TimerManager.Update(time.ElapsedGameTime.Milliseconds);
@@ -45,8 +45,8 @@ namespace BaseProject.Screens
         {
             spriteBatch.Begin();
             {
-                _player.Draw(spriteBatch);
                 _walls.ForEach(wall => wall.Draw(spriteBatch));
+                _player.Draw(spriteBatch);
                 UiManager.Draw(spriteBatch);
             }
             spriteBatch.End();

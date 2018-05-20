@@ -52,14 +52,25 @@ namespace BaseProject.Graphics
             _hitbox.Y = (int)Position.Y;
         }
 
+
+        public void PositionXIncrement(float value)
+        {
+            _position.X += value;
+        }
+
+        public void PositionYIncrement(float value)
+        {
+            _position.Y += value;
+        }
+
+
         #endregion
 
         #region Update & Draw Methods
 
         public virtual void Update(GameTime time)
         {
-            //Position += Velocity;
-            UpdateHitbox();
+
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)

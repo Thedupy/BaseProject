@@ -15,19 +15,27 @@ namespace BaseProject.Collisions
 
         #region Public Methods
 
-        public static void ProcessCollision(Sprite player)
+        public static void ProcessCollision(Sprite entity)
         {
+            var bounds = new Rectangle(entity.Hitbox.X, entity.Hitbox.Y, entity.Hitbox.Width, entity.Hitbox.Height);
             foreach (var sprite in Collidable)
             {
-                var distance = new Vector2(player.Hitbox.GetHorizontalIntersectionDepth(sprite.Hitbox),
-                    player.Hitbox.GetVerticalIntersectionDepth(sprite.Hitbox));
+                var tBounds = new Rectangle(sprite.Hitbox.X, sprite.Hitbox.Y, sprite.Hitbox.Width, sprite.Hitbox.Height);
+                var depth = new Vector2(bounds.GetHorizontalIntersectionDepth(tBounds),
+                    bounds.GetVerticalIntersectionDepth(tBounds));
 
-                if (Math.Abs(distance.Y) >= Math.Abs(distance.X))
-                    player.Position = new Vector2(player.Position.X + distance.X, player.Position.Y);
-                if (Math.Abs(distance.X) >= Math.Abs(distance.Y))
-                    player.Position = new Vector2(player.Position.X, player.Position.Y + distance.Y);
+                if (Math.Abs(depth.Y) >= Math.Abs(depth.X))
+                {
+                    entity.PositionXIncrement(depth.X);
+                }
 
-                player.UpdateHitbox();
+                if (Math.Abs(depth.X) >= Math.Abs(depth.Y))
+                {
+                    entity.PositionYIncrement(depth.Y);
+                }
+
+                bounds = new Rectangle(entity.Hitbox.X, entity.Hitbox.Y, entity.Hitbox.Width, entity.Hitbox.Height);
+                entity.UpdateHitbox();
             }
         }
 
